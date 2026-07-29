@@ -20,13 +20,30 @@ const topics = [
   { id:"t18", title:"中考函数模型方法题单", focus:"函数专题，强化训练", reason:"教研员审核", questions:22, minutes:35, difficulty:"较难", source:"龙岗区教研室", usage:1374, tag:"paper", tone:"sage" },
   { id:"t19", title:"《实验班提优训练》精选题单", focus:"基础完成后的进阶提升", reason:"本地常用教辅", questions:18, minutes:30, difficulty:"中等", source:"《实验班提优训练》", usage:831, tag:"workbook", tone:"cream" },
   { id:"t20", title:"《点拨》易错方法题单", focus:"典型错法与方法点拨", reason:"老师收藏较多", questions:16, minutes:25, difficulty:"中等", source:"《点拨》配套题单", usage:742, tag:"workbook", tone:"lilac" },
-  { id:"t21", title:"本校期中错题重组题单", focus:"基于三个班真实易错题", reason:"本校老师共建", questions:15, minutes:22, difficulty:"中等", source:"启航实验学校数学组", usage:96, tag:"school", tone:"mist" }
+  { id:"t21", title:"本校期中错题重组题单", focus:"基于三个班真实易错题", reason:"本校老师共建", questions:15, minutes:22, difficulty:"中等", source:"启航实验学校数学组", usage:96, tag:"school", tone:"mist" },
+  { id:"t22", title:"有理数课堂 5 分钟小测题单", focus:"当堂检测概念掌握情况", reason:"课堂小测", questions:8, minutes:5, difficulty:"简单", source:"龙城初级中学", usage:728, tag:"chapter", tone:"sage" },
+  { id:"t23", title:"一元一次方程移项易错题单", focus:"集中突破移项与符号错误", reason:"高频易错", questions:14, minutes:18, difficulty:"中等", source:"区教研精选", usage:1186, tag:"chapter", tone:"cream" },
+  { id:"t24", title:"线段与角基础概念辨析题单", focus:"易混概念判断与规范表达", reason:"概念辨析", questions:12, minutes:15, difficulty:"简单", source:"龙岗实验学校", usage:635, tag:"chapter", tone:"lilac" },
+  { id:"t25", title:"2025 深圳中考数学基础题单", focus:"近年真题中的基础得分点", reason:"真题新整理", questions:20, minutes:30, difficulty:"中等", source:"深圳中考试卷", usage:1458, tag:"paper", tone:"mist" },
+  { id:"t26", title:"《典中点》整式运算配套题单", focus:"同步巩固整式化简方法", reason:"教辅配套", questions:18, minutes:25, difficulty:"中等", source:"《典中点》配套题单", usage:884, tag:"workbook", tone:"sage" },
+  { id:"t27", title:"期末选择题快速提分题单", focus:"高频选择题与排除方法", reason:"本周热门", questions:16, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:1328, tag:"paper", tone:"cream" },
+  { id:"t28", title:"数学阅读理解情境题单", focus:"从真实情境中提取数量关系", reason:"新题型", questions:10, minutes:22, difficulty:"较难", source:"区教研精选", usage:576, tag:"latest", tone:"lilac" },
+  { id:"t29", title:"本校周末分层作业 A 组题单", focus:"面向基础薄弱学生巩固", reason:"本校分层作业", questions:15, minutes:20, difficulty:"简单", source:"启航实验学校数学组", usage:168, tag:"school", tone:"mist" },
+  { id:"t30", title:"本校周末分层作业 B 组题单", focus:"基础巩固后的综合应用", reason:"本校分层作业", questions:18, minutes:28, difficulty:"中等", source:"启航实验学校数学组", usage:152, tag:"school", tone:"sage" },
+  { id:"t31", title:"代数式实际意义专项题单", focus:"由情境列式并解释代数式", reason:"方法专项", questions:13, minutes:18, difficulty:"中等", source:"平湖片区教研", usage:692, tag:"chapter", tone:"cream" },
+  { id:"t32", title:"几何语言规范书写题单", focus:"训练符号语言与文字表达", reason:"规范表达", questions:12, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:804, tag:"chapter", tone:"lilac" },
+  { id:"t33", title:"期中考试压轴题拆解题单", focus:"按关键步骤拆解综合题", reason:"名校共建", questions:9, minutes:30, difficulty:"较难", source:"龙岗区四中联考", usage:1036, tag:"paper", tone:"mist" },
+  { id:"t34", title:"《必刷题》方程专题优选题单", focus:"典型方程题型与变式训练", reason:"教辅优选", questions:20, minutes:30, difficulty:"中等", source:"《必刷题》配套题单", usage:916, tag:"workbook", tone:"sage" },
+  { id:"t35", title:"月考前 20 分钟查漏题单", focus:"快速覆盖本月教学重点", reason:"最近收藏增长快", questions:14, minutes:20, difficulty:"中等", source:"坂田片区教研", usage:1274, tag:"latest", tone:"cream" }
 ];
 
 const byId = Object.fromEntries(topics.map(topic => [topic.id, topic]));
 const toneMap = { sage:"var(--sage)", cream:"var(--cream)", lilac:"var(--lilac)", mist:"var(--mist)" };
 let currentFilter = "all";
 let currentQuery = "";
+let infiniteObserver = null;
+let infiniteBatchIndex = 0;
+let infiniteLoading = false;
 
 const contentFeed = document.querySelector("#contentFeed");
 const emptyState = document.querySelector("#emptyState");
@@ -168,6 +185,95 @@ function schoolSection() {
     </section>`;
 }
 
+const infiniteBatches = [
+  {
+    layout:"rows",
+    title:"近期老师收藏较多",
+    subtitle:"来自真实收藏与使用增长",
+    ids:["t22","t23","t24","t25","t26","t27"]
+  },
+  {
+    layout:"tiles",
+    title:"更多教学任务题单",
+    subtitle:"小测、易错、分层、真题和方法专项",
+    ids:["t28","t29","t30","t31","t32","t33","t34","t35"]
+  },
+  {
+    layout:"cards",
+    title:"刚刚更新的优质题单",
+    subtitle:"本地教研、学校和常用教辅持续补充",
+    ids:["t35","t28","t25","t34","t23","t32"]
+  }
+];
+
+function infiniteBatchMarkup(batch, cycle) {
+  const list = batch.ids.map(id => byId[id]).filter(Boolean);
+  if (batch.layout === "rows") {
+    const half = Math.ceil(list.length / 2);
+    return `
+      <section class="endless-batch">
+        <header class="shelf-header"><div class="shelf-title"><h2>${batch.title}</h2><p>${batch.subtitle}</p></div><span class="batch-mark">第 ${cycle + 1} 组</span></header>
+        <div class="endless-row-panels">
+          <article>${list.slice(0,half).map((topic,index)=>compactRow(topic,index+1)).join("")}</article>
+          <article>${list.slice(half).map((topic,index)=>compactRow(topic,index+half+1)).join("")}</article>
+        </div>
+      </section>`;
+  }
+  if (batch.layout === "tiles") {
+    return `
+      <section class="endless-batch">
+        <header class="shelf-header"><div class="shelf-title"><h2>${batch.title}</h2><p>${batch.subtitle}</p></div><span class="batch-mark">持续上新</span></header>
+        <div class="endless-tile-grid">
+          ${list.map(topic => `
+            <button class="endless-tile" data-topic="${topic.id}">
+              <span>${topic.reason}</span>
+              <h3>${topic.title}</h3>
+              <p>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.difficulty}</p>
+              <small>${topic.source}</small>
+              <strong>${topic.usage.toLocaleString()} 位老师使用 <i class="ri-arrow-right-line"></i></strong>
+            </button>`).join("")}
+        </div>
+      </section>`;
+  }
+  return `
+    <section class="endless-batch">
+      <header class="shelf-header"><div class="shelf-title"><h2>${batch.title}</h2><p>${batch.subtitle}</p></div><span class="batch-mark">NEW</span></header>
+      <div class="shelf-viewport"><div class="shelf-track">${list.map(topicCard).join("")}</div></div>
+    </section>`;
+}
+
+function appendInfiniteBatch() {
+  const feed = document.querySelector("#endlessFeed");
+  if (!feed) return;
+  const batch = infiniteBatches[infiniteBatchIndex % infiniteBatches.length];
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = infiniteBatchMarkup(batch, infiniteBatchIndex);
+  const section = wrapper.firstElementChild;
+  feed.appendChild(section);
+  bindContentEvents(section);
+  infiniteBatchIndex += 1;
+}
+
+function setupInfiniteFeed() {
+  if (infiniteObserver) infiniteObserver.disconnect();
+  infiniteBatchIndex = 0;
+  infiniteLoading = false;
+  const sentinel = document.querySelector("#loadSentinel");
+  if (!sentinel) return;
+  appendInfiniteBatch();
+  infiniteObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting) || infiniteLoading) return;
+    infiniteLoading = true;
+    sentinel.classList.add("loading");
+    setTimeout(() => {
+      appendInfiniteBatch();
+      sentinel.classList.remove("loading");
+      infiniteLoading = false;
+    }, 420);
+  }, { rootMargin:"700px 0px" });
+  infiniteObserver.observe(sentinel);
+}
+
 function renderDefaultFeed() {
   return [
     `
@@ -199,7 +305,11 @@ function renderDefaultFeed() {
         <button class="collection-card cream" data-topic="t14"><span>12 份题单</span><h3>龙岗近三年<br>期末试卷题单合集</h3><p>按年份、难度和题型重新整理</p><strong>36 所学校共同使用</strong></button>
         <button class="collection-card lilac" data-topic="t19"><span>16 份题单</span><h3>本地常用教辅<br>配套题单合集</h3><p>题单来自教辅，但可以直接调整和使用</p><strong>本周新增 3 份</strong></button>
       </div>
-    </section>`
+    </section>
+    <div id="endlessFeed" class="endless-feed"></div>
+    <div id="loadSentinel" class="load-sentinel" aria-live="polite">
+      <span class="loading-ring"></span><p>继续向下，发现更多题单</p>
+    </div>`
   ].join("");
 }
 
@@ -222,10 +332,12 @@ function render() {
   emptyState.hidden = defaultState || count > 0;
   contentFeed.hidden = !defaultState && count === 0;
   bindContentEvents();
+  if (defaultState) setupInfiniteFeed();
+  else if (infiniteObserver) infiniteObserver.disconnect();
 }
 
-function bindContentEvents() {
-  document.querySelectorAll("[data-topic]").forEach(element => {
+function bindContentEvents(root = document) {
+  root.querySelectorAll("[data-topic]").forEach(element => {
     const open = () => openTopic(element.dataset.topic);
     element.addEventListener("click", event => {
       if (event.target.closest("[data-bookmark]")) return;
@@ -235,7 +347,7 @@ function bindContentEvents() {
       if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(); }
     });
   });
-  document.querySelectorAll("[data-bookmark]").forEach(button => {
+  root.querySelectorAll("[data-bookmark]").forEach(button => {
     button.addEventListener("click", event => {
       event.stopPropagation();
       button.classList.toggle("saved");
@@ -243,16 +355,16 @@ function bindContentEvents() {
       showToast(button.classList.contains("saved") ? "已收藏到我的题单" : "已取消收藏");
     });
   });
-  document.querySelectorAll(".view-all, .trending-panel header button").forEach(button => button.addEventListener("click", () => showToast("已展开更多题单")));
-  document.querySelectorAll(".source-tabs button").forEach(button => button.addEventListener("click", () => {
+  root.querySelectorAll(".view-all, .trending-panel header button").forEach(button => button.addEventListener("click", () => showToast("已展开更多题单")));
+  root.querySelectorAll(".source-tabs button").forEach(button => button.addEventListener("click", () => {
     document.querySelectorAll(".source-tabs button").forEach(item => item.classList.toggle("active", item === button));
     showToast(`正在查看${button.textContent}题单`);
   }));
-  document.querySelectorAll(".chapter-rail button").forEach(button => button.addEventListener("click", () => {
+  root.querySelectorAll(".chapter-rail button").forEach(button => button.addEventListener("click", () => {
     document.querySelectorAll(".chapter-rail button").forEach(item => item.classList.toggle("active", item === button));
     showToast(`已切换到${button.querySelector("b").textContent}`);
   }));
-  document.querySelectorAll(".workbook-group > header > button").forEach(button => button.addEventListener("click", () => {
+  root.querySelectorAll(".workbook-group > header > button").forEach(button => button.addEventListener("click", () => {
     showToast("已展开教辅目录");
   }));
 }
