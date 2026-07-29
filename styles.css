@@ -497,3 +497,34 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Browse tabs and the long-tail resource grid */
+.category-browser {
+  min-height: 52px; display: flex; align-items: center; gap: 24px; padding: 0;
+  border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent;
+}
+.category-tabs-head { display: flex; align-items: baseline; gap: 6px; padding: 0 2px 12px; white-space: nowrap; }
+.category-tabs-head b { font-family: "STSong", "Songti SC", serif; font-size: 17px; }
+.category-tabs-head span { color: #9aa49f; font-size: 8px; }
+.category-tabs { min-width: 0; flex: 1; display: flex; align-self: stretch; align-items: stretch; gap: 26px !important; overflow-x: auto; scrollbar-width: none; }
+.category-tabs::-webkit-scrollbar { display: none; }
+.category-tabs button {
+  position: relative; min-width: auto !important; display: inline-flex; align-items: center; padding: 0 1px 12px !important;
+  color: #7b8781 !important; font-size: 11px !important; white-space: nowrap; border: 0 !important; border-radius: 0 !important;
+  background: transparent !important;
+}
+.category-tabs button:hover { color: var(--green-800) !important; }
+.category-tabs button.active { color: var(--green-900) !important; font-weight: 700; }
+.category-tabs button.active::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--green-800); }
+.flat-resource-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.flat-resource-grid .topic-card { width: 100%; }
+.endless-batch + .endless-batch { margin-top: 18px; }
+
+@media (max-width: 600px) {
+  .category-browser { gap: 13px; }
+  .category-tabs-head { padding-bottom: 10px; }
+  .category-tabs { gap: 18px !important; }
+  .category-tabs button { padding-bottom: 10px !important; }
+  .flat-resource-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .flat-resource-grid .topic-card { min-height: 214px; }
+}

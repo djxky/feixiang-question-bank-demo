@@ -208,37 +208,10 @@ const infiniteBatches = [
 
 function infiniteBatchMarkup(batch, cycle) {
   const list = batch.ids.map(id => byId[id]).filter(Boolean);
-  if (batch.layout === "rows") {
-    const half = Math.ceil(list.length / 2);
-    return `
-      <section class="endless-batch">
-        <header class="shelf-header"><div class="shelf-title"><h2>${batch.title}</h2><p>${batch.subtitle}</p></div><span class="batch-mark">第 ${cycle + 1} 组</span></header>
-        <div class="endless-row-panels">
-          <article>${list.slice(0,half).map((topic,index)=>compactRow(topic,index+1)).join("")}</article>
-          <article>${list.slice(half).map((topic,index)=>compactRow(topic,index+half+1)).join("")}</article>
-        </div>
-      </section>`;
-  }
-  if (batch.layout === "tiles") {
-    return `
-      <section class="endless-batch">
-        <header class="shelf-header"><div class="shelf-title"><h2>${batch.title}</h2><p>${batch.subtitle}</p></div><span class="batch-mark">持续上新</span></header>
-        <div class="endless-tile-grid">
-          ${list.map(topic => `
-            <button class="endless-tile" data-topic="${topic.id}">
-              <span>${topic.reason}</span>
-              <h3>${topic.title}</h3>
-              <p>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.difficulty}</p>
-              <small>${topic.source}</small>
-              <strong>${topic.usage.toLocaleString()} 位老师使用 <i class="ri-arrow-right-line"></i></strong>
-            </button>`).join("")}
-        </div>
-      </section>`;
-  }
   return `
     <section class="endless-batch">
-      <header class="shelf-header"><div class="shelf-title"><h2>${batch.title}</h2><p>${batch.subtitle}</p></div><span class="batch-mark">NEW</span></header>
-      <div class="shelf-viewport"><div class="shelf-track">${list.map(topicCard).join("")}</div></div>
+      ${cycle === 0 ? `<header class="shelf-header"><div class="shelf-title"><h2>更多题单</h2><p>继续向下浏览，所有内容都可以直接预览和使用</p></div><span class="batch-mark">共 30+ 份</span></header>` : ""}
+      <div class="flat-resource-grid">${list.map(topicCard).join("")}</div>
     </section>`;
 }
 
@@ -276,6 +249,10 @@ function setupInfiniteFeed() {
 
 function renderDefaultFeed() {
   return [
+    shelf("老师们正在用的好题单", "不是题很多，而是已经选好、编好，可以直接拿走", ["t1","t2","t3","t4","t5","t6","t7"]),
+    chapterSection(),
+    workbookSection(),
+    schoolSection(),
     `
     <section class="weekly-resource">
       <article class="list-panel">
@@ -293,10 +270,6 @@ function renderDefaultFeed() {
         <footer>来自龙岗区教研、学校共建和本地常用资源</footer>
       </article>
     </section>`,
-    shelf("老师们正在用的好题单", "不是题很多，而是已经选好、编好，可以直接拿走", ["t1","t2","t3","t4","t5","t6","t7"]),
-    chapterSection(),
-    workbookSection(),
-    schoolSection(),
     `
     <section class="collection-section">
       <header class="shelf-header"><div class="shelf-title"><h2>一组一组地找题单</h2><p>把相关题单整理成合集，更适合连续教学</p></div><button class="view-all">全部合集 <i class="ri-arrow-right-s-line"></i></button></header>
