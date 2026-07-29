@@ -150,6 +150,8 @@ h1 {
 .activity-list small { overflow: hidden; color: #7f8a85; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
 .activity-list time { color: #9aa49f; font-size: 8px; }
 
+.first-screen { margin-top: 14px; }
+.weekly-hot { margin-top: 29px; }
 .collection-section { margin-top: 28px; }
 .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .collection-card {

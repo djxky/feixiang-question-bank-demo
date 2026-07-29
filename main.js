@@ -107,6 +107,32 @@ function shelf(title, subtitle, ids) {
     </section>`;
 }
 
+function firstScreenSection() {
+  const commonTopics = [byId.t1, byId.t2, byId.t3, byId.t4, byId.t9];
+  return `
+    <section class="first-screen" aria-label="首屏资源概览">
+      <div class="featured-lists">
+        <article class="list-panel">
+          <header>
+            <div><p>打开即可预览和布置</p><h2>本区常用题单</h2></div>
+            <button>查看全部 <i class="ri-arrow-right-s-line"></i></button>
+          </header>
+          <div>${commonTopics.map((topic, index) => compactRow(topic, index + 1)).join("")}</div>
+        </article>
+        <article class="resource-update">
+          <header><div><p><span class="live-dot"></span> 最近更新于 10 分钟前</p><h2>资源持续更新</h2></div><button>更新记录</button></header>
+          <div class="update-stat-grid">
+            <div><small>今日新增题单</small><strong>68</strong><span>份</span></div>
+            <div><small>新整理试卷</small><strong>26</strong><span>套</span></div>
+            <div><small>今日新增题目</small><strong>1,842</strong><span>道</span></div>
+            <div><small>更新教辅章节</small><strong>14</strong><span>章</span></div>
+          </div>
+          <footer>来自龙岗区教研、学校共建和本地常用资源</footer>
+        </article>
+      </div>
+    </section>`;
+}
+
 function chapterSection() {
   const chapterTopics = [byId.t8, byId.t9, byId.t10, byId.t11, byId.t12];
   return `
@@ -249,27 +275,15 @@ function setupInfiniteFeed() {
 
 function renderDefaultFeed() {
   return [
-    shelf("本区高频使用题单", "基于真实使用与收藏，打开即可预览和布置", ["t1","t2","t3","t4","t5","t6","t7"]),
-    `
-    <section class="weekly-resource">
-      <article class="list-panel">
-        <header><div><p>依据近 7 天真实使用数据</p><h2>本周龙岗热门题单</h2></div><button>完整榜单 <i class="ri-arrow-right-s-line"></i></button></header>
-        <div>${[byId.t4,byId.t18,byId.t2,byId.t9].map((topic,index)=>compactRow(topic,index+1)).join("")}</div>
-      </article>
-      <article class="resource-update">
-        <header><div><p><span class="live-dot"></span> 最近更新于 10 分钟前</p><h2>优质资源持续更新</h2></div><button>更新记录</button></header>
-        <div class="update-stat-grid">
-          <div><small>今日新增题目</small><strong>1,842</strong><span>道</span></div>
-          <div><small>今日新增题单</small><strong>68</strong><span>份</span></div>
-          <div><small>新整理试卷</small><strong>26</strong><span>套</span></div>
-          <div><small>更新教辅章节</small><strong>14</strong><span>章</span></div>
-        </div>
-        <footer>来自龙岗区教研、学校共建和本地常用资源</footer>
-      </article>
-    </section>`,
+    firstScreenSection(),
     chapterSection(),
     workbookSection(),
     schoolSection(),
+    `
+    <section class="weekly-hot list-panel">
+      <header><div><p>依据近 7 天真实使用数据</p><h2>本周龙岗热门题单</h2></div><button>完整榜单 <i class="ri-arrow-right-s-line"></i></button></header>
+      <div>${[byId.t4,byId.t18,byId.t2,byId.t9].map((topic,index)=>compactRow(topic,index+1)).join("")}</div>
+    </section>`,
     `
     <section class="collection-section">
       <header class="shelf-header"><div class="shelf-title"><h2>题单合集</h2><p>按章节、考试与教辅整理成组，适合连续教学</p></div><button class="view-all">全部合集 <i class="ri-arrow-right-s-line"></i></button></header>
