@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="飞象 AI 题库 · 本地优质题单广场" />
+    <title>飞象 AI 题库 · 题单广场</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="discovery">
+        <div class="context-identity" aria-label="当前资源范围">
+          <i class="ri-map-pin-2-line"></i>
+          <span>深圳市龙岗区</span>
+          <i class="context-divider"></i>
+          <span>七年级数学</span>
+          <small>已根据你的教学身份自动匹配</small>
+        </div>
+      </section>
+
+      <section class="category-browser" aria-label="题单分类">
+        <div class="category-label">
+          <b>浏览题单</b>
+          <span>1,286 份</span>
+        </div>
+        <div class="category-scroller">
+          <div id="filterChips" class="filter-chips" role="tablist" aria-label="题单筛选">
+            <button class="active" data-filter="all">全部题单</button>
+            <button data-filter="latest">本地最新</button>
+            <button data-filter="chapter">教材章节</button>
+            <button data-filter="workbook">教辅来源</button>
+            <button data-filter="paper">试卷来源</button>
+            <button data-filter="school">本校题单</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <div>
+          <i class="ri-file-search-line"></i>
+          <h2>这个分类暂时没有题单</h2>
+          <p>先看看其他分类，新的本地资源也会持续更新。</p>
+          <button id="resetFilter">查看全部题单</button>
+        </div>
+      </div>
+
+      <div id="contentFeed"></div>
+    </main>
+
+    <button id="openAi" class="ai-dock">
+      <span class="ai-dock-icon"><i class="ri-sparkling-2-line"></i></span>
+      <span class="ai-dock-copy"><b>没找到合适的题单？</b><small>描述教学要求，让 AI 生成一整份</small></span>
+      <span class="ai-dock-action">AI 生成题单 <i class="ri-arrow-right-line"></i></span>
+    </button>
+
+    <div id="drawerMask" class="mask" hidden></div>
+    <aside id="detailDrawer" class="drawer" aria-hidden="true">
+      <button id="closeDrawer" class="icon-button drawer-close" aria-label="关闭题单预览">
+        <i class="ri-close-line"></i>
+      </button>
+      <div class="drawer-content">
+        <p id="drawerReason" class="drawer-reason"></p>
+        <div class="drawer-heading">
+          <span id="drawerKind" class="source-badge"></span>
+          <button id="favoriteButton" class="favorite-button">
+            <i class="ri-bookmark-line"></i><span>收藏</span>
+          </button>
+        </div>
+        <h2 id="drawerTitle"></h2>
+        <p id="drawerSubtitle" class="drawer-subtitle"></p>
+
+        <div class="drawer-source">
+          <span id="sourceAvatar"></span>
+          <div>
+            <b id="drawerSource"></b>
+            <small>来源清晰 · 答案解析完整 · 经过真实教学使用</small>
+          </div>
+        </div>
+
+        <section class="outline-panel">
+          <header><b>题单结构</b><span>由浅入深</span></header>
+          <div class="level-bars">
+            <span class="easy" style="--width: 32%"></span>
+            <span class="medium" style="--width: 45%"></span>
+            <span class="hard" style="--width: 23%"></span>
+          </div>
+          <div class="level-labels">
+            <span><i class="easy"></i>基础概念 5 题</span>
+            <span><i class="medium"></i>方法应用 7 题</span>
+            <span><i class="hard"></i>综合提高 3 题</span>
+          </div>
+        </section>
+
+        <section class="preview-section">
+          <header><b>代表题预览</b><span id="drawerTotal"></span></header>
+          <article class="question">
+            <span>01 · 单项选择</span>
+            <p>在数轴上表示互为相反数的两个点，它们与原点的距离关系是（　）。</p>
+            <ol>
+              <li>相等</li><li>不相等</li><li>无法确定</li><li>与符号有关</li>
+            </ol>
+          </article>
+          <article class="question">
+            <span>08 · 解答题</span>
+            <p>结合实际情境解释正数与负数的意义，并在数轴上表示相关数量。</p>
+            <div class="answer-lines"></div>
+          </article>
+        </section>
+
+        <section class="why-panel">
+          <b>为什么推荐给你</b>
+          <p id="drawerWhy"></p>
+        </section>
+      </div>
+
+      <footer class="drawer-actions">
+        <button id="useDirectly" class="secondary-button">直接使用</button>
+        <button id="adjustUse" class="primary-button">调整后使用</button>
+      </footer>
+    </aside>
+
+    <div id="aiMask" class="modal-mask" hidden>
+      <section class="ai-modal" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle">
+        <button id="closeAi" class="icon-button modal-close" aria-label="关闭 AI 生成">
+          <i class="ri-close-line"></i>
+        </button>
+        <div id="aiForm">
+          <p class="modal-kicker"><i class="ri-sparkling-2-line"></i> AI 生成完整题单</p>
+          <h2 id="aiModalTitle">现成资源不合适，就按你的要求生成。</h2>
+          <p class="modal-copy">已自动带入七年级数学和本地教材信息，生成后仍可换题、增减题量和调整难度。</p>
+          <div class="context-tags"><span>七年级数学</span><span>人教版上册</span><span>深圳市龙岗区</span></div>
+          <label class="prompt-box">
+            <span>这次想练什么？</span>
+            <textarea>生成一份20分钟的有理数易错题单，基础题为主，包含3道符号判断题。</textarea>
+          </label>
+          <div class="select-grid">
+            <label><span>使用场景</span><select><option>课后巩固</option><option>课堂练习</option><option>单元检测</option></select></label>
+            <label><span>整体难度</span><select><option>基础—中等</option><option>基础为主</option><option>中等—提高</option></select></label>
+            <label><span>预计时长</span><select><option>20 分钟</option><option>30 分钟</option><option>45 分钟</option></select></label>
+          </div>
+          <button id="generateList" class="generate-button"><i class="ri-sparkling-2-line"></i><span>生成完整题单</span></button>
+        </div>
+        <div id="aiResult" hidden>
+          <p class="modal-kicker"><i class="ri-check-line"></i> 已生成，可继续调整</p>
+          <h2>七上有理数易错巩固题单</h2>
+          <p class="modal-copy">共 12 题，预计 20 分钟。优先使用龙岗区优质资源，并补充 2 道 AI 变式题。</p>
+          <div class="generated-outline">
+            <div><span>01</span><b>正负数意义</b><small>3 题 · 基础</small><button>调整</button></div>
+            <div><span>02</span><b>符号判断</b><small>3 题 · 易错</small><button>调整</button></div>
+            <div><span>03</span><b>有理数运算</b><small>4 题 · 中等</small><button>调整</button></div>
+            <div><span>04</span><b>综合应用</b><small>2 题 · 提高</small><button>调整</button></div>
+          </div>
+          <div class="modal-actions">
+            <button id="regenerate" class="secondary-button">重新生成</button>
+            <button id="editGenerated" class="primary-button">进入题单编辑</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
