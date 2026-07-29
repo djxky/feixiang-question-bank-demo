@@ -112,7 +112,7 @@ function chapterSection() {
   return `
     <section class="chapter-section">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>跟着当前教材进度找</h2><p>人教版七年级上册 · 按教材目录快速定位题单</p></div>
+        <div class="shelf-title"><h2>按教材版本与章节找</h2><p>先选教材版本，再按目录快速定位同步练习题单</p></div>
         <button class="view-all">完整教材目录 <i class="ri-arrow-right-s-line"></i></button>
       </header>
       <div class="chapter-layout">
@@ -146,7 +146,7 @@ function workbookSection() {
   return `
     <section class="workbook-section">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>来自教辅的优质题单</h2><p>按老师熟悉的教辅来源分组，组内仍然是可直接使用的题单</p></div>
+        <div class="shelf-title"><h2>按教辅与练习册找</h2><p>按书名、版本和章节进入，找到对应的配套题单</p></div>
         <button class="view-all">全部教辅来源 <i class="ri-arrow-right-s-line"></i></button>
       </header>
       <div class="workbook-groups">
@@ -168,8 +168,8 @@ function schoolSection() {
   return `
     <section class="school-section">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>本校老师共享题单</h2><p>来自本校备课组和老师真实教学使用</p></div>
-        <button class="view-all">进入本校题库 <i class="ri-arrow-right-s-line"></i></button>
+        <div class="shelf-title"><h2>本区与本校资源</h2><p>优先展示龙岗区教研、学校和备课组正在使用的题单</p></div>
+        <button class="view-all">进入本区题库 <i class="ri-arrow-right-s-line"></i></button>
       </header>
       <div class="school-table">
         <div class="school-table-head"><span>题单名称</span><span>来源</span><span>内容</span><span>本校使用</span><span></span></div>
@@ -249,10 +249,7 @@ function setupInfiniteFeed() {
 
 function renderDefaultFeed() {
   return [
-    shelf("老师们正在用的好题单", "不是题很多，而是已经选好、编好，可以直接拿走", ["t1","t2","t3","t4","t5","t6","t7"]),
-    chapterSection(),
-    workbookSection(),
-    schoolSection(),
+    shelf("本区高频使用题单", "基于真实使用与收藏，打开即可预览和布置", ["t1","t2","t3","t4","t5","t6","t7"]),
     `
     <section class="weekly-resource">
       <article class="list-panel">
@@ -270,9 +267,12 @@ function renderDefaultFeed() {
         <footer>来自龙岗区教研、学校共建和本地常用资源</footer>
       </article>
     </section>`,
+    chapterSection(),
+    workbookSection(),
+    schoolSection(),
     `
     <section class="collection-section">
-      <header class="shelf-header"><div class="shelf-title"><h2>一组一组地找题单</h2><p>把相关题单整理成合集，更适合连续教学</p></div><button class="view-all">全部合集 <i class="ri-arrow-right-s-line"></i></button></header>
+      <header class="shelf-header"><div class="shelf-title"><h2>题单合集</h2><p>按章节、考试与教辅整理成组，适合连续教学</p></div><button class="view-all">全部合集 <i class="ri-arrow-right-s-line"></i></button></header>
       <div class="collection-grid">
         <button class="collection-card green" data-topic="t8"><span>8 份题单</span><h3>七上有理数<br>完整题单合集</h3><p>课时练习、易错专项、单元复习与检测</p><strong>4,826 位老师使用</strong></button>
         <button class="collection-card cream" data-topic="t14"><span>12 份题单</span><h3>龙岗近三年<br>期末试卷题单合集</h3><p>按年份、难度和题型重新整理</p><strong>36 所学校共同使用</strong></button>
