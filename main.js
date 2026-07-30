@@ -341,30 +341,50 @@ function activityRankingSection() {
 }
 
 function homepageSeriesSection() {
-  const series = [
-    { name:"本地能力过关系列", label:"同步巩固", count:26, ids:["t9","t34"] },
-    { name:"易错方法系列", label:"方法专项", count:18, ids:["t20","t19"] },
-    { name:"常用提优训练系列", label:"进阶提升", count:14, ids:["t8","t2"] }
+  const seriesGroups = [
+    {
+      name:"本地能力过关系列", shortName:"能力过关", descriptor:"同步 · 检测",
+      count:26, ids:["t9","t40","t41"], accent:"#326c55", wash:"#e7f1eb"
+    },
+    {
+      name:"易错方法系列", shortName:"易错方法", descriptor:"错因 · 变式",
+      count:18, ids:["t20","t46","t47"], accent:"#9a7040", wash:"#f5eadc"
+    }
   ];
   return `
     <section class="homepage-series-section">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>教辅题单</h2><p>来自老师熟悉的训练系列，包含同步、专项与检测</p></div>
+        <div class="shelf-title"><h2>教辅题单</h2><p>一个训练系列包含多份题单，可直接选题单，也可以进入完整目录</p></div>
         <button class="view-all" data-open-filter="workbook">查看全部系列 <i class="ri-arrow-right-s-line"></i></button>
       </header>
-      <div class="series-library-grid">
-        ${series.map((item, seriesIndex) => `
-          <article class="series-library-card">
-            <button class="series-library-heading" data-series="${item.name}">
-              <span class="series-spine">${String(seriesIndex + 1).padStart(2, "0")}</span>
-              <span><small>${item.label}</small><b>${item.name}</b><em>${item.count} 份题单</em></span>
-              <i class="ri-arrow-right-up-line"></i>
+      <div class="series-volume-grid">
+        ${seriesGroups.map(item => `
+          <article class="series-volume-card" style="--volume-accent:${item.accent};--volume-wash:${item.wash}">
+            <button class="volume-cover" data-series="${item.name}" aria-label="查看${item.name}全部题单">
+              <span>题单系列</span>
+              <i class="ri-book-open-line"></i>
+              <b>${item.shortName}</b>
+              <small>七年级数学</small>
+              <em>${item.count} 份题单</em>
             </button>
-            <div class="series-library-topics">
-              ${item.ids.map(id => {
-                const topic = byId[id];
-                return `<button data-topic="${topic.id}"><span>${topic.title}</span><small>${topic.questions} 题 · ${topic.minutes} 分钟</small><i class="ri-arrow-right-s-line"></i></button>`;
-              }).join("")}
+            <div class="volume-catalog">
+              <header>
+                <button data-series="${item.name}"><b>${item.name}</b><small>${item.descriptor}</small></button>
+                <span>${item.count} 份</span>
+              </header>
+              <div class="volume-topic-list">
+                ${item.ids.map((id, index) => {
+                  const topic = byId[id];
+                  return `
+                    <button data-topic="${topic.id}">
+                      <span class="volume-topic-index">${String(index + 1).padStart(2, "0")}</span>
+                      <span><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.difficulty}</small></span>
+                      <strong>${topic.usage.toLocaleString()} 人使用</strong>
+                      <i class="ri-arrow-right-s-line"></i>
+                    </button>`;
+                }).join("")}
+              </div>
+              <button class="volume-view-all" data-series="${item.name}">查看该系列全部题单 <i class="ri-arrow-right-line"></i></button>
             </div>
           </article>`).join("")}
       </div>
