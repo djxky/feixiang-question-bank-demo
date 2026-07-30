@@ -690,22 +690,14 @@ function openSeries(seriesName) {
 function openTopic(id) {
   const topic = byId[id];
   if (!topic) return;
-  const sourceAvatar = document.querySelector("#sourceAvatar");
-  document.querySelector("#drawerReason").textContent = topic.reason;
-  document.querySelector("#drawerKind").textContent = topic.author ? "老师贡献题单" : topic.reason;
-  document.querySelector("#drawerTitle").textContent = topic.title;
-  document.querySelector("#drawerSubtitle").textContent = `${topic.questions} 题 · 约 ${topic.minutes} 分钟 · 难度 ${topic.difficulty}`;
-  document.querySelector("#drawerSource").textContent = topic.author
-    ? `${topic.author.name} · ${topic.author.school}`
-    : `来源：${topic.source}`;
-  sourceAvatar.className = topic.author ? `teacher-avatar ${topic.author.tone || ""}` : "resource-avatar";
-  sourceAvatar.innerHTML = topic.author ? topic.author.name.slice(0,1) : `<i class="${topic.tag === "paper" ? "ri-file-paper-2-line" : "ri-community-line"}"></i>`;
-  document.querySelector("#drawerTotal").textContent = `共 ${topic.questions} 题`;
-  document.querySelector("#drawerWhy").textContent = `${topic.reason}，并且与七年级数学当前教学进度匹配；题量适合一次 ${topic.minutes} 分钟左右的练习。`;
-  drawerMask.hidden = false;
-  detailDrawer.classList.add("open");
-  detailDrawer.setAttribute("aria-hidden","false");
-  document.body.style.overflow = "hidden";
+  const context = topic.tag === "workbook"
+    ? "series"
+    : topic.tag === "paper"
+      ? "paper"
+      : topic.tag === "special"
+        ? "knowledge"
+        : "chapter";
+  location.href = `./detail.html?topic=${encodeURIComponent(id)}&context=${context}`;
 }
 
 function closeTopic() {

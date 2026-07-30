@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="飞象 AI 题库 · 题单详情" />
+    <title>题单详情 · 飞象 AI 题库</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" />
+    <link rel="stylesheet" href="./detail.css" />
+  </head>
+  <body>
+    <header class="detail-topbar">
+      <a class="back-home" href="./index.html"><i class="ri-arrow-left-line"></i><span>题库首页</span></a>
+      <nav class="breadcrumb" aria-label="当前位置">
+        <span id="breadcrumbContext">人教版七年级上册</span>
+        <i class="ri-arrow-right-s-line"></i>
+        <strong id="breadcrumbLeaf">第一章 有理数</strong>
+      </nav>
+      <button id="mobileDirectory" class="mobile-directory" type="button"><i class="ri-list-unordered"></i>目录</button>
+    </header>
+
+    <div class="detail-shell">
+      <aside id="directoryPanel" class="directory-panel" aria-label="资源目录">
+        <div class="directory-head">
+          <small id="directoryKicker">教材目录</small>
+          <h2 id="directoryTitle">人教版 · 七年级上册</h2>
+          <p id="directorySummary">共 6 章 · 326 份同步题单</p>
+        </div>
+        <nav id="directoryTree" class="directory-tree"></nav>
+        <footer class="directory-footer">
+          <i class="ri-sparkling-2-line"></i>
+          <span>目录由题单标签自动归类</span>
+        </footer>
+      </aside>
+
+      <main class="detail-main">
+        <section class="topic-overview">
+          <div class="topic-heading">
+            <div>
+              <p id="topicReason" class="topic-reason">适合当前教学进度</p>
+              <h1 id="topicTitle">正数与负数概念巩固题单</h1>
+              <p id="topicFocus" class="topic-focus">理解实际意义，准确判断</p>
+            </div>
+            <div class="topic-actions">
+              <button id="favoriteTopic" class="quiet-action" type="button"><i class="ri-bookmark-line"></i><span>收藏</span></button>
+              <button class="quiet-action" data-action="download" type="button"><i class="ri-download-2-line"></i><span>下载</span></button>
+              <button class="secondary-action" data-action="edit" type="button">调整题单</button>
+              <button class="primary-action" data-action="use" type="button">直接使用</button>
+            </div>
+          </div>
+
+          <div class="topic-facts">
+            <span><i class="ri-file-list-3-line"></i><b id="questionCount">16</b> 题</span>
+            <span><i class="ri-time-line"></i>约 <b id="topicMinutes">20</b> 分钟</span>
+            <span><i class="ri-bar-chart-line"></i><b id="topicDifficulty">简单</b></span>
+            <span><i class="ri-user-line"></i><b id="topicUsage">762</b> 位老师使用</span>
+          </div>
+
+          <div class="topic-source">
+            <span id="sourceAvatar" class="source-avatar"><i class="ri-government-line"></i></span>
+            <div>
+              <b id="topicSource">龙岗区教研精选</b>
+              <small id="sourceDescription">来源清晰 · 答案解析完整 · 支持调整后使用</small>
+            </div>
+            <span class="quality-mark"><i class="ri-shield-check-line"></i>内容已校验</span>
+          </div>
+        </section>
+
+        <article class="paper">
+          <header class="paper-head">
+            <div>
+              <span>七年级数学 · 第一章</span>
+              <h2 id="paperTitle">正数与负数概念巩固题单</h2>
+            </div>
+            <p>姓名：__________　班级：__________　日期：__________</p>
+          </header>
+
+          <section class="paper-section">
+            <header><h3>一、单项选择题</h3><span>每题 4 分，共 24 分</span></header>
+            <ol class="question-list">
+              <li>
+                <p>如果向东走 3 米记作 +3 米，那么向西走 5 米应记作（　　）。</p>
+                <div class="options"><span>A. +5 米</span><span>B. −5 米</span><span>C. +3 米</span><span>D. −3 米</span></div>
+              </li>
+              <li>
+                <p>下列各组量中，具有相反意义的量是（　　）。</p>
+                <div class="options"><span>A. 上升 5 米与向东 5 米</span><span>B. 收入 80 元与支出 50 元</span><span>C. 长大 2 岁与减少 2 千克</span><span>D. 购进 10 件与卖出 8 元</span></div>
+              </li>
+              <li>
+                <p>在 −3、0、2.5、−1/2 四个数中，负数共有（　　）。</p>
+                <div class="options"><span>A. 1 个</span><span>B. 2 个</span><span>C. 3 个</span><span>D. 4 个</span></div>
+              </li>
+              <li>
+                <p>某天深圳的最高气温为 18 ℃，最低气温为 7 ℃，这一天的温差是（　　）。</p>
+                <div class="options"><span>A. 25 ℃</span><span>B. −25 ℃</span><span>C. 11 ℃</span><span>D. −11 ℃</span></div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="paper-section">
+            <header><h3>二、填空题</h3><span>每题 4 分，共 16 分</span></header>
+            <ol class="question-list" start="5">
+              <li><p>如果水库水位上升 0.8 米记作 +0.8 米，那么水位下降 0.5 米记作 ______ 米。</p></li>
+              <li><p>在一次数学测验中，平均分为 85 分。若把 88 分记作 +3 分，则 79 分记作 ______ 分。</p></li>
+              <li><p>数轴上与原点距离为 4 个单位长度的点表示的数是 ______。</p></li>
+              <li><p>请写出一个比 −2 小的整数：______。</p></li>
+            </ol>
+          </section>
+
+          <section class="paper-section">
+            <header><h3>三、解答题</h3><span>共 30 分</span></header>
+            <ol class="question-list" start="9">
+              <li>
+                <p>某食品包装袋上标有“净含量 500±5 g”。抽检 5 袋食品的质量分别为 497 g、503 g、506 g、500 g、495 g。请用正负数表示它们相对于标准质量的偏差，并判断哪些产品合格。</p>
+                <div class="answer-space"></div>
+              </li>
+              <li>
+                <p>周末小明从学校出发，沿东西方向的道路行走。规定向东为正，他的行走记录依次为 +2 km、−1.5 km、+0.5 km、−3 km。请说明他最后在学校的什么方向，距离学校多远。</p>
+                <div class="answer-space large"></div>
+              </li>
+            </ol>
+          </section>
+        </article>
+
+        <nav class="topic-neighbors" aria-label="相邻题单">
+          <button data-neighbor="prev"><i class="ri-arrow-left-line"></i><span><small>上一份</small><b>有理数概念基础过关题单</b></span></button>
+          <button data-neighbor="next"><span><small>下一份</small><b>有理数运算基础强化题单</b></span><i class="ri-arrow-right-line"></i></button>
+        </nav>
+
+        <section class="related-section">
+          <header>
+            <div><h2>继续练这一章</h2><p>同章节、同难度的优质题单</p></div>
+            <a href="./index.html?filter=chapter">查看章节全部题单 <i class="ri-arrow-right-s-line"></i></a>
+          </header>
+          <div id="relatedGrid" class="related-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="directoryMask" class="directory-mask" hidden></div>
+    <div id="toast" class="toast" role="status"></div>
+    <script type="module" src="./detail.js"></script>
+  </body>
+</html>
