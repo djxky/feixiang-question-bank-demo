@@ -1219,3 +1219,47 @@ h1 {
     min-height: 76px;
   }
 }
+
+/* Readability foundation: classroom tools should be calm and easy to scan. */
+:root {
+  --font-ui: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  --muted: #66746d;
+  font-family: var(--font-ui);
+}
+
+body, button, input, textarea, select { font-family: var(--font-ui); }
+body { color: #24322b; }
+.discovery-copy { color: #5f6d65; font-size: 15px; line-height: 1.75; }
+.pulse-title small, .pulse-stat small, .pulse-stat span, .pulse-source { font-size: 12px; }
+.list-panel header p, .source-rank header p, .activity-panel header p, .finder-heading > div > p { font-size: 12px; }
+.list-panel header h2, .source-rank header h2, .activity-panel header h2, .finder-heading h2 { font-family: var(--font-ui); font-size: 22px; }
+.list-panel header button, .source-rank header > span { font-size: 12px; }
+.compact-row { min-height: 60px; }
+.compact-main b { font-size: 14px; }
+.compact-main small, .compact-row strong { font-size: 12px; }
+.source-tabs button, .activity-list b, .activity-list small, .activity-list time { font-size: 12px; }
+.collection-card > span, .collection-card p, .collection-card strong { font-size: 12px; }
+.shelf-title h2 { font-family: var(--font-ui); font-size: 24px; }
+.shelf-title p, .view-all, .resource-count, .school-proof { font-size: 12px; }
+.topic-card .card-reason, .topic-card .signal-badge { font-size: 11px; }
+.card-cover h3 { font-family: var(--font-ui); font-size: 20px; line-height: 1.35; }
+.card-focus, .card-meta, .card-usage { font-size: 12px; }
+.teacher-source b, .resource-source b, .resource-source .series-link { font-size: 12px; }
+.teacher-source small, .resource-source small, .teacher-source em { font-size: 11px; }
+.category-heading h1 { font-family: var(--font-ui); }
+.category-heading > p, .category-heading > div > p { font-size: 12px; }
+.realtime-panel header p, .realtime-panel header button { font-size: 12px; }
+.realtime-panel header h2 { font-family: var(--font-ui); font-size: 22px; }
+.coverage-grid small, .coverage-grid span, .coverage-grid em, .recent-resource-list > span, .recent-resource-list b { font-size: 11px; }
+.sync-mode-tabs button, .sync-current-source { font-size: 12px; }
+.drawer-reason, .source-badge, .favorite-button, .drawer-subtitle, .drawer-source b, .drawer-source small { font-size: 12px; }
+.question p { font-size: 15px; }
+.question ol, .why-panel p, .context-tags span, .prompt-box > span, .select-grid label > span, .select-grid select, .modal-copy { font-size: 12px; }
+.generated-outline span, .generated-outline small, .quick-edits span, .quick-edits button { font-size: 11px; }
+
+@media (max-width: 600px) {
+  .discovery-copy { font-size: 14px; }
+  .compact-main b { font-size: 13px; }
+  .compact-main small, .compact-row strong { font-size: 11px; }
+  .shelf-title h2 { font-size: 22px; }
+}

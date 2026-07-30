@@ -1,4 +1,5 @@
 :root {
+  --font-ui: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
   --ink: #18231e;
   --muted: #75817b;
   --green-950: #123f30;
@@ -9,7 +10,7 @@
   --line-soft: #edf1ee;
   --paper: #fff;
   --canvas: #f5f7f5;
-  font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
   color: var(--ink);
   background: var(--canvas);
   font-synthesis: none;
@@ -117,6 +118,15 @@ a { color: inherit; text-decoration: none; }
 .related-card h3 { margin: 14px 0 6px; font-family: "STSong", "Songti SC", serif; font-size: 17px; line-height: 1.35; }
 .related-card p { margin: 0; color: #7b8781; font-size: 10px; }
 .related-card strong { margin-top: auto; padding-top: 13px; color: var(--green-800); font-size: 10px; border-top: 1px solid var(--line-soft); }
+
+/* Keep operational text legible; the serif treatment stays with the paper itself. */
+.directory-head small, .directory-head p, .directory-footer, .tree-leaf { font-size: 12px; }
+.directory-head h2, .tree-group > button { font-family: var(--font-ui); }
+.topic-reason, .topic-focus, .topic-facts, .topic-source b, .topic-source small, .quality-mark { font-size: 13px; }
+.quiet-action, .secondary-action, .primary-action { font-size: 13px; }
+.related-section p, .related-section a, .related-card > span, .related-card p, .related-card strong { font-size: 12px; }
+.related-card h3 { font-family: var(--font-ui); font-size: 18px; }
+.toast { font-size: 13px; }
 .directory-mask { position: fixed; inset: 64px 0 0; z-index: 29; background: rgba(17,34,26,.28); }
 .toast { position: fixed; left: 50%; bottom: 28px; z-index: 50; padding: 10px 16px; color: #fff; font-size: 12px; border-radius: 99px; background: #1d3d31; box-shadow: 0 12px 30px rgba(22,44,35,.2); opacity: 0; pointer-events: none; transform: translate(-50%, 12px); transition: .2s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
