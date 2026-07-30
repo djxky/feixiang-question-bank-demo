@@ -111,13 +111,12 @@ function topicCard(topic) {
       <div class="card-cover">
         <div class="card-signals"><span class="card-reason">${topic.reason}</span>${badge}</div>
         <h3>${topic.title}</h3>
-        <p class="card-focus">${topic.focus}</p>
       </div>
       <div class="card-body">
         <div class="card-meta"><span>${topic.questions} 题</span><span>${topic.minutes} 分钟</span><span>${topic.difficulty}</span></div>
-        ${sourceMarkup(topic)}
-        <div class="card-bottom">
-          <span class="card-usage"><i class="ri-user-line"></i>${topic.usage.toLocaleString()} 位老师使用</span>
+        <div class="card-footer">
+          ${sourceMarkup(topic)}
+          <span class="card-usage">${topic.usage.toLocaleString()} 人使用</span>
           <button class="bookmark" data-bookmark aria-label="收藏题单"><i class="ri-bookmark-line"></i></button>
         </div>
       </div>
@@ -479,41 +478,47 @@ const infiniteBatches = [
     layout:"rows",
     title:"近期老师收藏较多",
     subtitle:"来自真实收藏与使用增长",
-    ids:["t22","t24","t27","t29","t30","t31","t32","t35"]
+    ids:["t22","t24","t27","t29","t30","t31","t32","t35","t36","t40"]
   },
   {
     layout:"tiles",
     title:"更多教学任务题单",
     subtitle:"小测、易错、分层、真题和方法专项",
-    ids:["t28","t29","t30","t31","t32","t33","t34","t35"]
+    ids:["t28","t29","t30","t31","t32","t33","t34","t35","t41","t44"]
   },
   {
     layout:"cards",
     title:"刚刚更新的优质题单",
     subtitle:"本地教研、学校和常用训练系列持续补充",
-    ids:["t35","t28","t25","t34","t23","t32","t15","t17"]
+    ids:["t35","t28","t25","t34","t23","t32","t15","t17","t38","t43"]
   }
 ];
 
-function infiniteBatchMarkup(batch, cycle) {
-  const list = batch.ids.map(id => byId[id]).filter(Boolean);
+function infiniteFeedMarkup() {
   return `
     <section class="endless-batch">
-      ${cycle === 0 ? `<header class="shelf-header"><div class="shelf-title"><h2>更多题单</h2><p>继续向下浏览，所有内容都可以直接预览和使用</p></div><span class="batch-mark">共 30+ 份</span></header>` : ""}
-      <div class="flat-resource-grid">${list.map(topicCard).join("")}</div>
+      <header class="shelf-header"><div class="shelf-title"><h2>更多题单</h2><p>继续向下浏览，所有内容都可以直接预览和使用</p></div><span class="batch-mark">共 30+ 份</span></header>
+      <div class="flat-resource-grid" data-endless-grid></div>
     </section>`;
 }
 
 function appendInfiniteBatch() {
   const feed = document.querySelector("#endlessFeed");
   if (!feed) return;
+  if (!feed.querySelector("[data-endless-grid]")) feed.innerHTML = infiniteFeedMarkup();
+  const grid = feed.querySelector("[data-endless-grid]");
   const batch = infiniteBatches[infiniteBatchIndex % infiniteBatches.length];
+  const list = batch.ids.map(id => byId[id]).filter(Boolean);
   const wrapper = document.createElement("div");
-  wrapper.innerHTML = infiniteBatchMarkup(batch, infiniteBatchIndex);
-  const section = wrapper.firstElementChild;
-  feed.appendChild(section);
-  bindContentEvents(section);
+  wrapper.innerHTML = list.map(topicCard).join("");
+  bindContentEvents(wrapper);
+  while (wrapper.firstElementChild) grid.appendChild(wrapper.firstElementChild);
   infiniteBatchIndex += 1;
+}
+
+function appendInfinitePage() {
+  appendInfiniteBatch();
+  appendInfiniteBatch();
 }
 
 function setupInfiniteFeed() {
@@ -522,13 +527,13 @@ function setupInfiniteFeed() {
   infiniteLoading = false;
   const sentinel = document.querySelector("#loadSentinel");
   if (!sentinel) return;
-  appendInfiniteBatch();
+  appendInfinitePage();
   infiniteObserver = new IntersectionObserver(entries => {
     if (!entries.some(entry => entry.isIntersecting) || infiniteLoading) return;
     infiniteLoading = true;
     sentinel.classList.add("loading");
     setTimeout(() => {
-      appendInfiniteBatch();
+      appendInfinitePage();
       sentinel.classList.remove("loading");
       infiniteLoading = false;
     }, 420);

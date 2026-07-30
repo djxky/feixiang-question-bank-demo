@@ -8,7 +8,7 @@
   --muted: #8c9692;
   --line: #dfe5e1;
   --line-soft: #ebefec;
-  --canvas: #fbfcfa;
+  --canvas: #f3f6f3;
   --white: #fff;
   --sage: #e9f3ed;
   --cream: #f8f0e5;
@@ -1262,4 +1262,349 @@ body { color: #24322b; }
   .compact-main b { font-size: 13px; }
   .compact-main small, .compact-row strong { font-size: 11px; }
   .shelf-title h2 { font-size: 22px; }
+}
+
+/* Compact resource cards: text-first, consistent and deliberately restrained. */
+.topic-card {
+  position: relative;
+  min-height: 178px;
+  overflow: hidden;
+  grid-template-rows: minmax(0, 1fr) auto;
+  border-color: #d9e1dc;
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: none;
+}
+.topic-card::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--tone);
+}
+.topic-card:hover {
+  transform: translateY(-2px);
+  border-color: #b9c8c0;
+  background: #fcfdfc;
+  box-shadow: 0 10px 22px rgba(31, 65, 50, .065);
+}
+.topic-card .card-cover {
+  min-height: 0;
+  display: block;
+  padding: 15px 15px 6px;
+  background: transparent;
+}
+.topic-card .card-signals {
+  min-height: 21px;
+  justify-content: flex-start;
+}
+.topic-card .card-reason {
+  max-width: calc(100% - 40px);
+  overflow: hidden;
+  padding: 4px 7px;
+  color: #426654;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 5px;
+  background: var(--tone);
+}
+.topic-card .signal-badge {
+  margin-left: auto;
+  padding: 4px 0;
+  font-size: 9px;
+  letter-spacing: .5px;
+  background: transparent;
+}
+.topic-card .card-cover h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 48px;
+  margin: 14px 0 0;
+  max-width: none;
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.42;
+  letter-spacing: -.15px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.topic-card .card-body {
+  display: block;
+  padding: 0 15px 12px;
+}
+.topic-card .card-meta {
+  gap: 4px 7px;
+  padding: 8px 0;
+  color: #59665f;
+  font-size: 10px;
+  font-weight: 500;
+  border-top: 1px solid var(--line-soft);
+}
+.topic-card .card-meta span + span::before {
+  margin-right: 7px;
+}
+.topic-card .card-footer {
+  min-height: 31px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 23px;
+  align-items: center;
+  gap: 7px;
+}
+.topic-card .teacher-source,
+.topic-card .resource-source {
+  min-width: 0;
+  min-height: 28px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 6px;
+  margin: 0;
+}
+.topic-card .teacher-avatar,
+.topic-card .source-type-icon {
+  width: 24px;
+  height: 24px;
+}
+.topic-card .teacher-source b,
+.topic-card .resource-source b,
+.topic-card .resource-source .series-link {
+  max-width: 100%;
+  color: #53615a;
+  font-size: 9px;
+  font-weight: 600;
+}
+.topic-card .teacher-source small {
+  font-size: 8px;
+}
+.topic-card .card-usage {
+  color: #48705f;
+  font-size: 9px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.topic-card .bookmark {
+  width: 23px;
+  height: 23px;
+  opacity: .58;
+}
+.topic-card:hover .bookmark,
+.topic-card .bookmark.saved {
+  opacity: 1;
+}
+
+@media (min-width: 1180px) {
+  .flat-resource-grid,
+  .series-topic-grid,
+  .paper-result-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .topic-card {
+    min-height: 174px !important;
+  }
+}
+
+/* One type system: four levels, one family and one neutral-green text palette. */
+:root {
+  --text-primary: #22312a;
+  --text-secondary: #52615a;
+  --text-muted: #748079;
+  --text-faint: #929c97;
+  --brand-text: #2f7157;
+  --type-section: 22px;
+  --type-card: 17px;
+  --type-body: 13px;
+  --type-meta: 11px;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.pulse-title b,
+.pulse-stat strong,
+.rank,
+.collection-card h3,
+.category-tabs-head b,
+.update-strip-title b,
+.update-strip-stat strong,
+.personalized-heading h2,
+.compact-hot-ranking h2,
+.continue-series-card > strong,
+.recommend-card > strong,
+.compact-hot-ranking > header > span,
+.ranking-panel > header b,
+.school-index,
+.detail-heading h1,
+.detail-heading > strong,
+.category-heading strong,
+.realtime-panel header h2,
+.resource-update header h2,
+.resource-overview header h2,
+.update-stat-grid strong,
+.coverage-grid strong,
+.chapter-rail button > span,
+.chapter-order,
+.book-mark,
+.workbook-group h3,
+.task-entry-grid b,
+.endless-tile h3,
+.drawer h2,
+.ai-modal h2,
+.question p,
+.generated-outline span {
+  font-family: var(--font-ui);
+}
+
+.empty-state h2,
+.series-spine,
+.series-library-heading b,
+.signal-badge {
+  font-family: var(--font-ui);
+}
+
+body {
+  color: var(--text-primary);
+}
+
+.shelf-title h2,
+.personalized-heading h2,
+.compact-hot-ranking h2,
+.list-panel header h2,
+.source-rank header h2,
+.activity-panel header h2,
+.finder-heading h2,
+.realtime-panel header h2,
+.resource-update header h2,
+.resource-overview header h2 {
+  color: var(--text-primary);
+  font-size: var(--type-section);
+  font-weight: 600;
+  letter-spacing: -.25px;
+}
+
+.topic-card .card-cover h3,
+.continue-series-card > strong,
+.recommend-card > strong,
+.collection-card h3,
+.workbook-group h3,
+.task-entry-grid b {
+  color: var(--text-primary);
+  font-size: var(--type-card);
+  font-weight: 650;
+  letter-spacing: -.1px;
+}
+
+.continue-series-card > strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.continue-series-card > small {
+  color: rgba(255, 255, 255, .68);
+}
+
+.continue-series-card .continue-label {
+  color: #9cddbc;
+}
+
+.compact-main b,
+.school-resource-main b,
+.chapter-topic-row b,
+.school-row b,
+.activity-list b,
+.teacher-contribution-main b,
+.series-panel-heading b,
+.paper-result-heading b {
+  color: var(--text-primary);
+  font-size: var(--type-body);
+  font-weight: 600;
+}
+
+.shelf-title p,
+.personalized-heading p,
+.compact-hot-ranking p,
+.discovery-copy,
+.collection-card p,
+.modal-copy,
+.why-panel p {
+  color: var(--text-muted);
+  font-size: var(--type-body);
+}
+
+.topic-card .card-reason,
+.topic-card .signal-badge,
+.topic-card .card-meta,
+.topic-card .card-usage,
+.topic-card .teacher-source b,
+.topic-card .resource-source b,
+.topic-card .resource-source .series-link,
+.compact-main small,
+.compact-row strong,
+.school-resource-main small,
+.famous-school-row > strong,
+.teacher-contribution-main small,
+.teacher-contribution-main em,
+.view-all,
+.resource-count,
+.school-proof,
+.batch-mark,
+.load-sentinel p {
+  font-size: var(--type-meta);
+}
+
+.topic-card .card-meta,
+.topic-card .teacher-source b,
+.topic-card .resource-source b,
+.topic-card .resource-source .series-link,
+.compact-main small,
+.school-resource-main small,
+.teacher-contribution-main em {
+  color: var(--text-secondary);
+}
+
+.topic-card .teacher-source small,
+.resource-source small,
+.activity-list small,
+.activity-list time,
+.chapter-topic-row small,
+.school-row small {
+  color: var(--text-faint);
+  font-size: 10px;
+}
+
+.view-all,
+.topic-card .card-usage,
+.compact-row strong,
+.famous-school-row > strong,
+.school-proof {
+  color: var(--brand-text);
+}
+
+.signal-badge.hot {
+  color: #c34d3d;
+}
+
+.signal-badge.new {
+  color: #23805c;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --type-section: 20px;
+    --type-card: 16px;
+    --type-body: 12px;
+    --type-meta: 11px;
+  }
 }
