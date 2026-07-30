@@ -24,11 +24,12 @@
       <section class="category-browser" aria-label="题单分类">
         <div class="category-tabs-head"><b>题单</b><span>1,286 份</span></div>
         <div id="filterChips" class="filter-chips category-tabs" role="tablist" aria-label="题单分类">
-          <button class="active" data-filter="all">全部</button>
-          <button data-filter="chapter">同步练习</button>
-          <button data-filter="special">专项练习</button>
-          <button data-filter="paper">试卷题单</button>
-          <button data-filter="school">本区/本校</button>
+          <button class="active" data-filter="all" role="tab" aria-selected="true">全部</button>
+          <button data-filter="chapter" role="tab" aria-selected="false">同步练习</button>
+          <button data-filter="special" role="tab" aria-selected="false">专项练习</button>
+          <button data-filter="paper" role="tab" aria-selected="false">试卷题单</button>
+          <button data-filter="workbook" role="tab" aria-selected="false">配套系列</button>
+          <button data-filter="school" role="tab" aria-selected="false">本区/本校</button>
         </div>
       </section>
 
@@ -44,11 +45,12 @@
       <div id="contentFeed"></div>
     </main>
 
-    <button id="openAi" class="ai-dock">
-      <span class="ai-dock-icon"><i class="ri-sparkling-2-line"></i></span>
-      <span class="ai-dock-copy"><b>没找到合适的题单？</b><small>描述教学要求，让 AI 生成一整份</small></span>
-      <span class="ai-dock-action">AI 生成题单 <i class="ri-arrow-right-line"></i></span>
-    </button>
+    <form id="aiDock" class="ai-dock" aria-label="AI 生成题单">
+      <button id="aiAdd" class="ai-dock-icon" type="button" aria-label="添加材料"><i class="ri-add-line"></i></button>
+      <input id="aiQuickInput" class="ai-quick-input" placeholder="描述你想要的题单，例如：20 分钟的有理数易错练习" />
+      <button id="aiVoice" class="ai-voice-button" type="button" aria-label="语音输入"><i class="ri-mic-line"></i></button>
+      <button id="openAi" class="ai-dock-action" type="submit" aria-label="生成题单"><i class="ri-arrow-up-line"></i></button>
+    </form>
 
     <div id="drawerMask" class="mask" hidden></div>
     <aside id="detailDrawer" class="drawer" aria-hidden="true">
