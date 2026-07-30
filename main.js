@@ -172,8 +172,26 @@ function recommendationCard(topic, reason) {
     </button>`;
 }
 
+function rankingRow(topic, rank, mode = "hot") {
+  const heated = rank <= 3;
+  const metric = mode === "rising"
+    ? `↑ ${[42, 38, 35, 31, 27, 24][rank - 1]}%`
+    : `${topic.usage.toLocaleString()}次`;
+  return `
+    <button class="ranking-row" data-topic="${topic.id}">
+      <span class="rank-heat ${heated ? `heat-${rank}` : ""}">
+        ${heated ? '<i class="ri-fire-fill"></i>' : ""}
+        <em>${String(rank).padStart(2, "0")}</em>
+      </span>
+      <span class="compact-main"><b>${topic.title}</b><small>${topic.source} · ${topic.questions}题 · ${topic.minutes}分钟</small></span>
+      <strong>${metric}</strong>
+      <i class="ri-arrow-right-s-line"></i>
+    </button>`;
+}
+
 function personalizedFirstScreenSection() {
-  const hot = [byId.t18, byId.t35, byId.t6, byId.t14, byId.t27];
+  const hot = [byId.t18, byId.t35, byId.t6, byId.t14, byId.t27, byId.t25];
+  const rising = [byId.t15, byId.t17, byId.t3, byId.t24, byId.t12, byId.t22];
   return `
     <section class="personalized-first-screen" aria-label="个性化推荐与本周热用">
       <article class="personalized-recommendations">
@@ -182,23 +200,29 @@ function personalizedFirstScreenSection() {
           <span><i class="ri-refresh-line"></i> 随教学进度更新</span>
         </header>
         <div class="personalized-grid">
-          <button class="continue-series-card" data-series="易错方法系列">
-            <span class="continue-label"><i class="ri-history-line"></i> 继续使用</span>
-            <strong>易错方法系列</strong>
-            <small>你最近常用 · 当前章节：有理数及其运算</small>
-            <span><b>12 份匹配题单</b><i class="ri-arrow-right-line"></i></span>
-          </button>
+          ${recommendationCard(byId.t20, "继续使用 · 易错方法系列")}
           ${recommendationCard(byId.t8, "当前章节")}
           ${recommendationCard(byId.t21, "本校老师刚刚使用")}
           ${recommendationCard(byId.t2, "龙岗同年级近 7 天常用")}
+          ${recommendationCard(byId.t15, "你所在片区最近常用")}
+          ${recommendationCard(byId.t31, "根据近期专项练习推荐")}
         </div>
       </article>
       <article class="compact-hot-ranking">
         <header>
-          <div><h2>本周热用</h2><p>龙岗七年级 · 每小时更新</p></div>
-          <span>TOP 5</span>
+          <div><h2>龙岗热榜</h2><p>七年级数学 · 每小时更新</p></div>
+          <div class="ranking-tabs" role="tablist" aria-label="热榜类型">
+            <button class="active" data-ranking-tab="hot" role="tab" aria-selected="true"><i class="ri-fire-fill"></i>热用</button>
+            <button data-ranking-tab="rising" role="tab" aria-selected="false"><i class="ri-line-chart-line"></i>飙升</button>
+          </div>
         </header>
-        <div>${hot.map((topic, index) => compactRow(topic, index + 1)).join("")}</div>
+        <div class="ranking-list" data-ranking-panel="hot">
+          ${hot.map((topic, index) => rankingRow(topic, index + 1)).join("")}
+        </div>
+        <div class="ranking-list" data-ranking-panel="rising" hidden>
+          ${rising.map((topic, index) => rankingRow(topic, index + 1, "rising")).join("")}
+        </div>
+        <button class="ranking-more">查看完整 TOP 20 <i class="ri-arrow-right-line"></i></button>
       </article>
     </section>`;
 }
@@ -348,20 +372,18 @@ function homepageSeriesSection() {
 }
 
 function famousSchoolSection() {
-  const schoolResources = [byId.t36, byId.t37, byId.t38, byId.t39];
+  const schoolResources = [byId.t36, byId.t37, byId.t38, byId.t39, byId.t6];
   return `
     <section class="famous-school-section">
       <header class="shelf-header">
         <div class="shelf-title"><h2>名校资源</h2><p>来自深圳名校公开交流与校际共建，可直接预览和使用</p></div>
-        <span class="school-proof">4 所学校 · 本周新增 12 份</span>
+        <span class="school-proof">5 所学校 · 本周新增 16 份</span>
       </header>
       <div class="famous-school-grid">
-        ${schoolResources.map((topic, index) => `
-          <button class="famous-school-row" data-topic="${topic.id}">
-            <span class="school-index">${String(index + 1).padStart(2, "0")}</span>
+        ${schoolResources.map(topic => `
+          <button class="famous-school-card" data-topic="${topic.id}">
             <span class="school-resource-main"><em>${topic.source.split("公开")[0].split("校际")[0]}</em><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.focus}</small></span>
-            <strong>${topic.usage.toLocaleString()} 位老师使用</strong>
-            <i class="ri-arrow-right-s-line"></i>
+            <span class="school-card-footer"><strong>${topic.usage.toLocaleString()} 位老师使用</strong><i class="ri-arrow-right-s-line"></i></span>
           </button>`).join("")}
       </div>
     </section>`;
@@ -372,7 +394,7 @@ function teacherContributionSection() {
   return `
     <section class="teacher-contribution-section">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>老师共建</h2><p>来自龙岗学校真实教学使用与分享</p></div>
+        <div class="shelf-title"><h2>本校资源</h2><p>来自本校教研组与老师的日常使用和分享</p></div>
         <span class="school-proof">本周新增 18 份</span>
       </header>
       <div class="teacher-contribution-grid">
@@ -545,7 +567,6 @@ function renderDefaultFeed() {
   return [
     localUpdateStrip(),
     personalizedFirstScreenSection(),
-    taskEntrySection(),
     famousSchoolSection(),
     teacherContributionSection(),
     homepageSeriesSection(),
@@ -600,6 +621,18 @@ function bindContentEvents(root = document) {
     document.querySelectorAll(".source-tabs button").forEach(item => item.classList.toggle("active", item === button));
     showToast(`正在查看${button.textContent}题单`);
   }));
+  root.querySelectorAll("[data-ranking-tab]").forEach(button => button.addEventListener("click", () => {
+    const ranking = button.closest(".compact-hot-ranking");
+    ranking.querySelectorAll("[data-ranking-tab]").forEach(item => {
+      const active = item === button;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", String(active));
+    });
+    ranking.querySelectorAll("[data-ranking-panel]").forEach(panel => {
+      panel.hidden = panel.dataset.rankingPanel !== button.dataset.rankingTab;
+    });
+  }));
+  root.querySelectorAll(".ranking-more").forEach(button => button.addEventListener("click", () => showToast("已展开龙岗完整热榜")));
   root.querySelectorAll("[data-open-filter]").forEach(button => button.addEventListener("click", () => {
     setMainFilter(button.dataset.openFilter);
     window.scrollTo({ top: 0, behavior: "smooth" });
