@@ -793,3 +793,223 @@ h1 {
   .update-strip-stat:nth-of-type(n+4) { display: none; }
   .personalized-first-screen { grid-template-columns: 1fr; }
 }
+
+/* Homepage readability pass: keep the dense resource rhythm without microscopic copy */
+:root {
+  --muted: #717d77;
+}
+
+.context-identity {
+  font-size: 13px;
+}
+.context-identity small {
+  color: #7d8883;
+  font-size: 11px;
+}
+
+.category-tabs-head b {
+  font-size: 20px;
+}
+.category-tabs-head span {
+  color: #7f8a85;
+  font-size: 11px;
+}
+.category-tabs button {
+  color: #66736d !important;
+  font-size: 13px !important;
+}
+
+.update-strip-title b {
+  font-size: 17px;
+}
+.update-strip-title small {
+  color: rgba(255,255,255,.7);
+  font-size: 10px;
+}
+.update-strip-stat span {
+  color: rgba(255,255,255,.72);
+  font-size: 10px;
+}
+.local-update-strip > button {
+  font-size: 11px;
+}
+
+.personalized-heading h2,
+.compact-hot-ranking h2 {
+  font-size: 23px;
+}
+.personalized-heading p,
+.compact-hot-ranking p {
+  color: #6f7b75;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.personalized-heading > span {
+  color: #5e756a;
+  font-size: 10px;
+}
+.continue-series-card,
+.recommend-card {
+  min-height: 120px;
+  padding: 12px 13px;
+}
+.continue-label,
+.recommend-reason {
+  font-size: 10px;
+}
+.continue-series-card > strong,
+.recommend-card > strong {
+  font-size: 17px;
+  line-height: 1.3;
+}
+.continue-series-card > small,
+.recommend-focus {
+  font-size: 10px;
+  line-height: 1.4;
+}
+.continue-series-card > span:last-child,
+.recommend-meta {
+  font-size: 10px;
+}
+.recommend-source b {
+  color: #435149;
+  font-size: 10px;
+}
+.recommend-source small {
+  color: #748079;
+  font-size: 9px;
+}
+.recommend-footer > em {
+  font-size: 10px;
+}
+
+.compact-hot-ranking > header > span {
+  font-size: 11px;
+}
+.compact-hot-ranking .compact-row {
+  min-height: 49px;
+}
+.compact-hot-ranking .compact-main b {
+  font-size: 12px;
+}
+.compact-hot-ranking .compact-main small {
+  color: #748079;
+  font-size: 10px;
+}
+.compact-hot-ranking .compact-row strong {
+  font-size: 10px;
+}
+
+.shelf-title h2 {
+  font-size: 24px;
+}
+.shelf-title p {
+  color: #717d77;
+  font-size: 12px;
+}
+.view-all {
+  font-size: 12px;
+}
+
+.task-entry-grid b {
+  font-size: 18px;
+}
+.task-entry-grid small {
+  color: #68746e;
+  font-size: 11px;
+}
+.task-entry-grid em {
+  font-size: 10px;
+}
+
+.school-proof {
+  font-size: 10px;
+}
+.school-resource-main em {
+  font-size: 10px;
+}
+.school-resource-main b {
+  font-size: 13px;
+}
+.school-resource-main small {
+  color: #6f7b75;
+  font-size: 10px;
+}
+.famous-school-row > strong {
+  font-size: 10px;
+}
+
+.teacher-contribution-main small {
+  font-size: 10px;
+}
+.teacher-contribution-main b {
+  font-size: 13px;
+}
+.teacher-contribution-main em {
+  color: #6f7b75;
+  font-size: 10px;
+}
+
+.card-reason {
+  font-size: 10px;
+}
+.signal-badge {
+  font-size: 9px;
+}
+.card-cover h3 {
+  font-size: 20px;
+}
+.card-focus {
+  color: #52605a;
+  font-size: 11px;
+}
+.card-meta {
+  font-size: 11px;
+}
+.teacher-source b,
+.resource-source b,
+.resource-source .series-link {
+  color: #435149;
+  font-size: 10px;
+}
+.teacher-source small,
+.resource-source small {
+  color: #748079;
+  font-size: 9px;
+}
+.teacher-source em {
+  font-size: 9px;
+}
+.card-usage {
+  font-size: 10px;
+}
+
+.batch-mark {
+  font-size: 10px;
+}
+.load-sentinel p {
+  font-size: 11px;
+}
+
+.ai-quick-input {
+  font-size: 14px;
+}
+.ai-quick-input::placeholder {
+  color: #7f8984;
+}
+
+@media (max-width: 600px) {
+  .category-tabs button {
+    font-size: 12px !important;
+  }
+  .personalized-heading h2,
+  .compact-hot-ranking h2 {
+    font-size: 21px;
+  }
+  .shelf-title h2 {
+    font-size: 22px;
+  }
+  .shelf-title p {
+    font-size: 11px;
+  }
+}
