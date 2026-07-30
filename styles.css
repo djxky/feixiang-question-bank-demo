@@ -1173,57 +1173,6 @@ h1 {
   color: #a0aaa5;
 }
 
-.endless-compact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #fff;
-}
-.endless-compact-grid .compact-row {
-  min-height: 64px;
-  padding: 8px 15px;
-}
-.endless-compact-grid .compact-row:nth-child(even) {
-  border-left: 1px solid var(--line-soft);
-}
-.endless-compact-grid .compact-row:nth-child(-n+2) {
-  border-top: 0;
-}
-.endless-compact-grid .compact-main b {
-  font-size: 12px;
-}
-.endless-compact-grid .compact-main small,
-.endless-compact-grid .compact-row strong {
-  font-size: 10px;
-}
-.endless-tile {
-  min-height: 150px;
-  background: #fff;
-}
-.endless-tile:nth-child(4n+2),
-.endless-tile:nth-child(4n+3),
-.endless-tile:nth-child(4n+4) {
-  background: #fff;
-}
-.endless-tile:nth-child(odd) {
-  background: #f7f9f8;
-}
-.endless-tile > span {
-  color: #456756;
-  font-size: 10px;
-  background: #edf4f0;
-}
-.endless-tile h3 {
-  font-size: 19px;
-}
-.endless-tile p,
-.endless-tile small,
-.endless-tile strong {
-  font-size: 10px;
-}
-
 .ai-dock {
   bottom: 10px;
   width: min(640px, calc(100vw - 36px));
@@ -1268,14 +1217,5 @@ h1 {
   }
   .recommend-card {
     min-height: 76px;
-  }
-  .endless-compact-grid {
-    grid-template-columns: 1fr;
-  }
-  .endless-compact-grid .compact-row:nth-child(even) {
-    border-left: 0;
-  }
-  .endless-compact-grid .compact-row:nth-child(2) {
-    border-top: 1px solid var(--line-soft);
   }
 }

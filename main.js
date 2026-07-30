@@ -497,22 +497,10 @@ const infiniteBatches = [
 
 function infiniteBatchMarkup(batch, cycle) {
   const list = batch.ids.map(id => byId[id]).filter(Boolean);
-  const content = batch.layout === "rows"
-    ? `<div class="endless-compact-grid">${list.map((topic, index) => compactRow(topic, index + 1)).join("")}</div>`
-    : batch.layout === "tiles"
-      ? `<div class="endless-tile-grid">${list.map(topic => `
-          <button class="endless-tile" data-topic="${topic.id}">
-            <span>${topic.reason}</span>
-            <h3>${topic.title}</h3>
-            <p>${topic.focus}</p>
-            <small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.source}</small>
-            <strong>${topic.usage.toLocaleString()} 位老师使用 <i class="ri-arrow-right-line"></i></strong>
-          </button>`).join("")}</div>`
-      : `<div class="flat-resource-grid">${list.map(topicCard).join("")}</div>`;
   return `
     <section class="endless-batch">
       ${cycle === 0 ? `<header class="shelf-header"><div class="shelf-title"><h2>更多题单</h2><p>继续向下浏览，所有内容都可以直接预览和使用</p></div><span class="batch-mark">共 30+ 份</span></header>` : ""}
-      ${content}
+      <div class="flat-resource-grid">${list.map(topicCard).join("")}</div>
     </section>`;
 }
 
