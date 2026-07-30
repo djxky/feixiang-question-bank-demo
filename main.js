@@ -83,22 +83,20 @@ function sourceMarkup(topic) {
       <div class="teacher-source">
         <span class="teacher-avatar ${topic.author.tone || ""}">${topic.author.name.slice(0,1)}</span>
         <span><b>${topic.author.name}</b><small>${topic.author.school}</small></span>
-        <em>老师贡献</em>
       </div>`;
   }
   if (topic.tag === "workbook") {
     return `
       <div class="resource-source">
         <span class="source-type-icon"><i class="ri-book-2-line"></i></span>
-        <span><small>配套系列</small><button class="series-link" data-series="${topic.source}">${topic.source}<i class="ri-arrow-right-s-line"></i></button></span>
+        <span><button class="series-link" data-series="${topic.source}">${topic.source}<i class="ri-arrow-right-s-line"></i></button></span>
       </div>`;
   }
-  const sourceType = topic.tag === "paper" ? "真题来源" : "题单来源";
   const sourceIcon = topic.tag === "paper" ? "ri-file-paper-2-line" : "ri-community-line";
   return `
     <div class="resource-source">
       <span class="source-type-icon"><i class="${sourceIcon}"></i></span>
-      <span><small>${sourceType}</small><b>${topic.source}</b></span>
+      <span><b>${topic.source}</b></span>
     </div>`;
 }
 
@@ -165,16 +163,13 @@ function localUpdateStrip() {
 }
 
 function recommendationCard(topic, reason) {
-  const source = topic.author
-    ? `<span class="recommend-source"><span class="teacher-avatar ${topic.author.tone || ""}">${topic.author.name.slice(0,1)}</span><span><b>${topic.author.name}</b><small>${topic.author.school}</small></span></span>`
-    : `<span class="recommend-source"><i class="${topic.tag === "paper" ? "ri-file-paper-2-line" : "ri-community-line"}"></i><span><b>${topic.source}</b><small>${topic.tag === "paper" ? "本地真题来源" : "题单来源"}</small></span></span>`;
+  const source = topic.author ? `${topic.author.name} · ${topic.author.school}` : topic.source;
   return `
     <button class="recommend-card" data-topic="${topic.id}" style="--tone:${toneMap[topic.tone]}">
       <span class="recommend-reason"><i class="ri-sparkling-2-line"></i>${reason}</span>
       <strong>${topic.title}</strong>
-      <small class="recommend-focus">${topic.focus}</small>
-      <span class="recommend-meta">${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.difficulty}</span>
-      <span class="recommend-footer">${source}<em>${topic.usage.toLocaleString()} 人使用</em></span>
+      <small class="recommend-brief">${topic.questions} 题 · ${topic.minutes} 分钟 · ${source}</small>
+      <em class="recommend-usage">${topic.usage.toLocaleString()} 人使用</em>
     </button>`;
 }
 
@@ -184,8 +179,8 @@ function personalizedFirstScreenSection() {
     <section class="personalized-first-screen" aria-label="个性化推荐与本周热用">
       <article class="personalized-recommendations">
         <header class="personalized-heading">
-          <div><h2>为你推荐</h2><p>根据七年级数学、当前进度和龙岗同年级老师的使用情况</p></div>
-          <span><i class="ri-refresh-line"></i> 推荐会随教学进度更新</span>
+          <div><h2>为你推荐</h2><p>依据教学进度与本地使用习惯</p></div>
+          <span><i class="ri-refresh-line"></i> 随教学进度更新</span>
         </header>
         <div class="personalized-grid">
           <button class="continue-series-card" data-series="易错方法系列">
@@ -194,9 +189,9 @@ function personalizedFirstScreenSection() {
             <small>你最近常用 · 当前章节：有理数及其运算</small>
             <span><b>12 份匹配题单</b><i class="ri-arrow-right-line"></i></span>
           </button>
-          ${recommendationCard(byId.t8, "你正在教有理数及其运算")}
-          ${recommendationCard(byId.t21, "本校 3 位老师刚刚使用")}
-          ${recommendationCard(byId.t2, "龙岗同年级老师近 7 天常用")}
+          ${recommendationCard(byId.t8, "当前章节")}
+          ${recommendationCard(byId.t21, "本校老师刚刚使用")}
+          ${recommendationCard(byId.t2, "龙岗同年级近 7 天常用")}
         </div>
       </article>
       <article class="compact-hot-ranking">
@@ -323,13 +318,33 @@ function activityRankingSection() {
 }
 
 function homepageSeriesSection() {
+  const series = [
+    { name:"本地能力过关系列", label:"同步巩固", count:26, ids:["t9","t34"] },
+    { name:"易错方法系列", label:"方法专项", count:18, ids:["t20","t19"] },
+    { name:"常用提优训练系列", label:"进阶提升", count:14, ids:["t8","t2"] }
+  ];
   return `
     <section class="homepage-series-section">
       <header class="shelf-header">
         <div class="shelf-title"><h2>教辅题单</h2><p>来自老师熟悉的训练系列，包含同步、专项与检测</p></div>
         <button class="view-all" data-open-filter="workbook">查看全部系列 <i class="ri-arrow-right-s-line"></i></button>
       </header>
-      <div class="flat-resource-grid">${["t9","t20","t19","t34"].map(id => topicCard(byId[id])).join("")}</div>
+      <div class="series-library-grid">
+        ${series.map((item, seriesIndex) => `
+          <article class="series-library-card">
+            <button class="series-library-heading" data-series="${item.name}">
+              <span class="series-spine">${String(seriesIndex + 1).padStart(2, "0")}</span>
+              <span><small>${item.label}</small><b>${item.name}</b><em>${item.count} 份题单</em></span>
+              <i class="ri-arrow-right-up-line"></i>
+            </button>
+            <div class="series-library-topics">
+              ${item.ids.map(id => {
+                const topic = byId[id];
+                return `<button data-topic="${topic.id}"><span>${topic.title}</span><small>${topic.questions} 题 · ${topic.minutes} 分钟</small><i class="ri-arrow-right-s-line"></i></button>`;
+              }).join("")}
+            </div>
+          </article>`).join("")}
+      </div>
     </section>`;
 }
 
@@ -482,10 +497,22 @@ const infiniteBatches = [
 
 function infiniteBatchMarkup(batch, cycle) {
   const list = batch.ids.map(id => byId[id]).filter(Boolean);
+  const content = batch.layout === "rows"
+    ? `<div class="endless-compact-grid">${list.map((topic, index) => compactRow(topic, index + 1)).join("")}</div>`
+    : batch.layout === "tiles"
+      ? `<div class="endless-tile-grid">${list.map(topic => `
+          <button class="endless-tile" data-topic="${topic.id}">
+            <span>${topic.reason}</span>
+            <h3>${topic.title}</h3>
+            <p>${topic.focus}</p>
+            <small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.source}</small>
+            <strong>${topic.usage.toLocaleString()} 位老师使用 <i class="ri-arrow-right-line"></i></strong>
+          </button>`).join("")}</div>`
+      : `<div class="flat-resource-grid">${list.map(topicCard).join("")}</div>`;
   return `
     <section class="endless-batch">
       ${cycle === 0 ? `<header class="shelf-header"><div class="shelf-title"><h2>更多题单</h2><p>继续向下浏览，所有内容都可以直接预览和使用</p></div><span class="batch-mark">共 30+ 份</span></header>` : ""}
-      <div class="flat-resource-grid">${list.map(topicCard).join("")}</div>
+      ${content}
     </section>`;
 }
 
