@@ -8,7 +8,7 @@ const topics = [
   { id:"t6", title:"初一期末高频易错周测题单", focus:"名校周测，适合分层选题与命题参考", reason:"名校资源", highlight:"精品", questions:18, minutes:30, difficulty:"较难", source:"深圳外国语学校龙岗学校", usage:1089, tag:"paper", tone:"cream" },
   { id:"t7", title:"整式运算高频易错巩固题单", focus:"整式运算常见错误归纳", reason:"热门系列", questions:14, minutes:20, difficulty:"中等", source:"全品学练考", usage:522, tag:"workbook", tone:"lilac" },
   { id:"t8", title:"正负数实际意义与数轴过关题单", focus:"理解实际意义，准确判断", reason:"七上第1章", questions:16, minutes:20, difficulty:"简单", source:"区教研精选", usage:762, tag:"chapter", tone:"sage" },
-  { id:"t9", title:"有理数运算基础过关与易错自测", focus:"贴近教材知识链与能力层级", reason:"本地教辅", highlight:"精品", questions:20, minutes:25, difficulty:"中等", source:"知识能力与练习", usage:1143, tag:"workbook", tone:"cream" },
+  { id:"t9", title:"有理数运算基础过关与易错自测", focus:"贴近教材知识链与能力层级", reason:"本地教辅", highlight:"精品", questions:20, minutes:25, difficulty:"中等", source:"多维导学案", usage:1143, tag:"workbook", tone:"cream" },
   { id:"t10", title:"整式加减：合并同类项与去括号过关", focus:"合并同类项与化简", reason:"七上第3章", questions:18, minutes:20, difficulty:"简单", source:"龙岗区教研室", usage:908, tag:"chapter", tone:"lilac" },
   { id:"t11", title:"一元一次方程应用：审题建模专项", focus:"顺序解题方法与实际应用", reason:"本校老师共建", questions:22, minutes:25, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"李老师", school:"启航实验学校", tone:"amber" }, usage:1221, tag:"school", tone:"mist" },
   { id:"t12", title:"几何初步：图形语言与概念辨析", focus:"直线、射线和线段", reason:"七上第4章", questions:14, minutes:15, difficulty:"简单", source:"龙岗区实验学校", author:{ name:"赵老师", school:"龙岗区实验学校", tone:"mint" }, usage:669, tag:"school", tone:"sage" },
@@ -39,8 +39,8 @@ const topics = [
   { id:"t37", title:"期中压轴题：关键步骤与分层选题", focus:"按关键步骤拆分综合题，适合分层使用", reason:"名校教研共建", highlight:"精品", questions:10, minutes:28, difficulty:"较难", source:"龙岗区实验学校", usage:1436, tag:"school", tone:"cream" },
   { id:"t38", title:"数学阅读与真实情境建模题单", focus:"从真实语境中提取数量关系与条件", reason:"名校公开交流", highlight:"精品", questions:14, minutes:25, difficulty:"中等", source:"龙岗区外国语学校", usage:1298, tag:"school", tone:"lilac" },
   { id:"t39", title:"几何语言规范与推理进阶题单", focus:"强化图形语言、推理步骤与规范书写", reason:"名校教研共建", highlight:"精品", questions:16, minutes:24, difficulty:"中等", source:"龙城初级中学", usage:1184, tag:"school", tone:"mist" },
-  { id:"t40", title:"有理数概念：数轴、相反数与绝对值过关", focus:"概念辨析、数轴表示与相反数", reason:"同步巩固", questions:16, minutes:20, difficulty:"简单", source:"知识能力与练习", usage:968, tag:"workbook", tone:"sage" },
-  { id:"t41", title:"有理数单元检测：运算、应用与探究", focus:"覆盖运算法则、混合运算与实际应用", reason:"单元检测", highlight:"精品", questions:22, minutes:35, difficulty:"中等", source:"知识能力与练习", usage:1046, tag:"workbook", tone:"mist" },
+  { id:"t40", title:"有理数概念：数轴、相反数与绝对值过关", focus:"概念辨析、数轴表示与相反数", reason:"同步巩固", questions:16, minutes:20, difficulty:"简单", source:"多维导学案", usage:968, tag:"workbook", tone:"sage" },
+  { id:"t41", title:"有理数单元检测：运算、应用与探究", focus:"覆盖运算法则、混合运算与实际应用", reason:"单元检测", highlight:"精品", questions:22, minutes:35, difficulty:"中等", source:"多维导学案", usage:1046, tag:"workbook", tone:"mist" },
   { id:"t42", title:"整式加减课时精练：去括号与合并同类项", focus:"合并同类项与去括号课时训练", reason:"热门系列", questions:14, minutes:18, difficulty:"简单", source:"全品学练考", usage:786, tag:"workbook", tone:"cream" },
   { id:"t43", title:"一元一次方程同步检测：解法与应用", focus:"从解方程到实际问题的阶段检测", reason:"热门系列", questions:20, minutes:30, difficulty:"中等", source:"全品学练考", usage:852, tag:"workbook", tone:"lilac" },
   { id:"t44", title:"有理数规律探究与思维进阶", focus:"从基础运算过渡到规律探究", reason:"能力提高", questions:15, minutes:28, difficulty:"较难", source:"常用提优训练系列", usage:734, tag:"workbook", tone:"sage" },
@@ -61,6 +61,7 @@ let infiniteObserver = null;
 let infiniteBatchIndex = 0;
 let infiniteLoading = false;
 let feedCardOrder = 0;
+let editorialCarouselTimer = null;
 const feedFilterState = { type:"all", difficulty:"all", source:"all", sort:"default" };
 
 const contentFeed = document.querySelector("#contentFeed");
@@ -305,7 +306,6 @@ function seriesCategoryView() {
       </div>
       <div class="series-quick-links">
         <button class="active" data-series-query="">全部系列</button>
-        <button data-series-query="知识能力与练习">知识能力与练习</button>
         <button data-series-query="全品学练考">全品学练考</button>
         <button data-series-query="原创新课堂">原创新课堂</button>
         <button data-series-query="多维导学案">多维导学案</button>
@@ -384,7 +384,7 @@ function activityRankingSection() {
 function homepageSeriesSection() {
   const seriesGroups = [
     {
-      name:"知识能力与练习", teacher:"周老师", teacherTone:"mint",
+      name:"多维导学案", teacher:"周老师", teacherTone:"mint",
       count:26, ids:["t9","t40","t41"], accent:"#326c55", wash:"#e7f1eb"
     },
     {
@@ -770,8 +770,161 @@ function setupInfiniteFeed() {
   infiniteObserver.observe(sentinel);
 }
 
+function editorialFeatureSection() {
+  const slides = [
+    {
+      theme:"szlg",
+      school:"深圳中学龙岗学校",
+      eyebrow:"名校公开课资源",
+      title:"七上有理数方法：公开课配套小测",
+      description:"从概念辨析到方法迁移，完整保留名校课堂的选题思路与难度梯度。",
+      tags:["公开课配套", "方法迁移", "1,682 位老师使用"],
+      topic:"t36",
+      count:"12 题",
+      cardTitle:"有理数<br>方法小测",
+      cardMeta:"概念 · 方法 · 迁移"
+    },
+    {
+      theme:"experiment",
+      school:"龙岗区实验学校",
+      eyebrow:"本区名校教研共建",
+      title:"期中压轴题：关键步骤分层选题",
+      description:"把综合题拆成关键步骤，基础班、提高班都能直接找到合适的题目。",
+      tags:["名校共建", "分层选题", "1,436 位老师使用"],
+      topic:"t37",
+      count:"10 题",
+      cardTitle:"期中压轴<br>分层题单",
+      cardMeta:"基础 · 提高 · 挑战"
+    },
+    {
+      theme:"foreign",
+      school:"深圳外国语学校龙岗学校",
+      eyebrow:"名校周测精选",
+      title:"初一期末高频易错：名校周测精选",
+      description:"聚合七上期末高频失分点，适合复习课选题、分层作业与命题参考。",
+      tags:["期末周测", "高频易错", "1,089 位老师使用"],
+      topic:"t6",
+      count:"18 题",
+      cardTitle:"期末易错<br>周测精选",
+      cardMeta:"基础 · 易错 · 压轴"
+    }
+  ];
+  return `
+    <section class="editorial-feature" aria-label="龙岗名校精选题单" aria-roledescription="轮播">
+      <div class="editorial-feature-track">
+        ${slides.map((slide, index) => `
+          <article class="editorial-feature-slide editorial-feature-${slide.theme}${index === 0 ? " is-active" : ""}" data-editorial-slide="${index}" data-editorial-topic="${slide.topic}" role="link" tabindex="${index === 0 ? "0" : "-1"}" aria-label="${index + 1} / ${slides.length}，${slide.school}，查看题单" aria-hidden="${index === 0 ? "false" : "true"}">
+            <div class="editorial-feature-copy">
+              <p><i class="ri-sparkling-2-line"></i> ${slide.eyebrow}</p>
+              <strong class="editorial-school-name">${slide.school}</strong>
+              <h1>${slide.title}</h1>
+              <span>${slide.description}</span>
+              <div class="editorial-feature-meta"><span>${slide.count}</span><span>${slide.tags[0]}</span><strong>${slide.tags[2]}</strong><i class="ri-arrow-right-line"></i></div>
+            </div>
+            <div class="editorial-feature-visual" aria-hidden="true">
+              <div class="feature-paper feature-paper-back">
+                <small>教研共建</small><b>${slide.count}</b><span></span><span></span>
+              </div>
+              <div class="feature-paper feature-paper-mid">
+                <small>精选题单</small><b>答案解析</b><span></span><span></span><span></span>
+              </div>
+              <div class="feature-paper feature-paper-front">
+                <p>${slide.school}</p>
+                <b>${slide.cardTitle}</b>
+                <span>${slide.cardMeta}</span>
+                <i class="ri-file-list-3-line"></i>
+              </div>
+            </div>
+          </article>`).join("")}
+      </div>
+      <div class="editorial-carousel-controls" aria-label="切换名校精选">
+        <button type="button" data-editorial-prev aria-label="上一页"><i class="ri-arrow-left-s-line"></i></button>
+        <div class="editorial-carousel-dots">
+          ${slides.map((slide, index) => `<button type="button" data-editorial-dot="${index}" class="${index === 0 ? "active" : ""}" aria-label="查看${slide.school}" aria-current="${index === 0 ? "true" : "false"}"></button>`).join("")}
+        </div>
+        <button type="button" data-editorial-next aria-label="下一页"><i class="ri-arrow-right-s-line"></i></button>
+      </div>
+    </section>`;
+}
+
+function setupEditorialCarousel(root = document) {
+  if (editorialCarouselTimer) {
+    clearInterval(editorialCarouselTimer);
+    editorialCarouselTimer = null;
+  }
+  const carousel = root.querySelector(".editorial-feature");
+  if (!carousel) return;
+  const track = carousel.querySelector(".editorial-feature-track");
+  const slides = [...carousel.querySelectorAll("[data-editorial-slide]")];
+  const dots = [...carousel.querySelectorAll("[data-editorial-dot]")];
+  let activeIndex = 0;
+  let pointerStartX = null;
+  let suppressSlideClick = false;
+
+  const goTo = index => {
+    activeIndex = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${activeIndex * 100}%)`;
+    slides.forEach((slide, slideIndex) => {
+      const active = slideIndex === activeIndex;
+      slide.classList.toggle("is-active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+      slide.tabIndex = active ? 0 : -1;
+    });
+    dots.forEach((dot, dotIndex) => {
+      const active = dotIndex === activeIndex;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-current", String(active));
+    });
+  };
+  const startAutoPlay = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (editorialCarouselTimer) clearInterval(editorialCarouselTimer);
+    editorialCarouselTimer = setInterval(() => goTo(activeIndex + 1), 6500);
+  };
+  const stopAutoPlay = () => {
+    if (editorialCarouselTimer) clearInterval(editorialCarouselTimer);
+    editorialCarouselTimer = null;
+  };
+
+  carousel.querySelector("[data-editorial-prev]").addEventListener("click", () => goTo(activeIndex - 1));
+  carousel.querySelector("[data-editorial-next]").addEventListener("click", () => goTo(activeIndex + 1));
+  dots.forEach(dot => dot.addEventListener("click", () => goTo(Number(dot.dataset.editorialDot))));
+  slides.forEach(slide => {
+    slide.addEventListener("click", () => {
+      if (!suppressSlideClick && slide.classList.contains("is-active")) openTopic(slide.dataset.editorialTopic);
+    });
+    slide.addEventListener("keydown", event => {
+      if ((event.key === "Enter" || event.key === " ") && slide.classList.contains("is-active")) {
+        event.preventDefault();
+        openTopic(slide.dataset.editorialTopic);
+      }
+    });
+  });
+  carousel.addEventListener("keydown", event => {
+    if (event.key === "ArrowLeft") goTo(activeIndex - 1);
+    if (event.key === "ArrowRight") goTo(activeIndex + 1);
+  });
+  carousel.addEventListener("pointerdown", event => { pointerStartX = event.clientX; });
+  carousel.addEventListener("pointerup", event => {
+    if (pointerStartX === null) return;
+    const delta = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(delta) < 42) return;
+    suppressSlideClick = true;
+    goTo(activeIndex + (delta < 0 ? 1 : -1));
+    setTimeout(() => { suppressSlideClick = false; }, 0);
+  });
+  carousel.addEventListener("pointercancel", () => { pointerStartX = null; });
+  carousel.addEventListener("mouseenter", stopAutoPlay);
+  carousel.addEventListener("mouseleave", startAutoPlay);
+  carousel.addEventListener("focusin", stopAutoPlay);
+  carousel.addEventListener("focusout", startAutoPlay);
+  startAutoPlay();
+}
+
 function renderDefaultFeed() {
   return [
+    editorialFeatureSection(),
     homepageSeriesSection(),
     famousSchoolSection(),
     teacherContributionSection(),
@@ -906,6 +1059,7 @@ function bindContentEvents(root = document) {
     const group = button.parentElement;
     group.querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
   }));
+  setupEditorialCarousel(root);
 }
 
 function setMainFilter(filter) {
