@@ -1,56 +1,56 @@
 const topics = [
-  { id:"hero", title:"2026 龙岗区七年级数学期末复习核心题单", focus:"覆盖必考基础、常见易错和综合拓展，适合期末冲刺前完成一次系统复习。", reason:"龙岗区教研精选 · 今日更新", questions:24, minutes:45, difficulty:"中等", source:"龙岗区教研中心", usage:3642, tag:"paper", tone:"deep" },
-  { id:"t1", title:"龙岗易错二练：有理数运算", focus:"错因诊断、针对变式、二次过关", reason:"龙岗易错二练", questions:15, minutes:20, difficulty:"中等", source:"龙岗区易错专题", usage:386, tag:"special", tone:"sage" },
-  { id:"t2", title:"2026 深圳南山区初一上期末考试", focus:"本地命题风格与阶段难度参考", reason:"深圳区级真题", highlight:"精品", questions:22, minutes:40, difficulty:"中等", source:"南山区初一上期末真题", usage:1206, tag:"paper", tone:"cream" },
-  { id:"t3", title:"情景数学题：深圳专用", focus:"深圳真实情境改编，考点不变、题面更新", reason:"巩固复习", highlight:"名师推荐", questions:12, minutes:25, difficulty:"中等", source:"深圳情境题专题", usage:842, tag:"special", tone:"lilac" },
-  { id:"t4", title:"2024—2026 深圳初一下期末真题汇编：图形的轴对称", focus:"把分散真题整理成可直接使用的课内专题", reason:"真题汇编", highlight:"精品", questions:24, minutes:35, difficulty:"较难", source:"深圳初一下期末真题", usage:1532, tag:"paper", tone:"mist" },
-  { id:"t5", title:"2025—2026 深圳初一下期末真题汇编：全等三角形", focus:"按考点重组近两年深圳区级真题", reason:"真题汇编", highlight:"精品", questions:18, minutes:30, difficulty:"中等", source:"深圳初一下期末真题", usage:613, tag:"special", tone:"sage" },
-  { id:"t6", title:"初一期末周测试卷", focus:"名校周测，适合分层选题与命题参考", reason:"名校资源", highlight:"精品", questions:18, minutes:30, difficulty:"较难", source:"深圳中学", usage:1089, tag:"paper", tone:"cream" },
-  { id:"t7", title:"整式运算易错巩固题单", focus:"整式运算常见错误归纳", reason:"热门系列", questions:14, minutes:20, difficulty:"中等", source:"全品学练考", usage:522, tag:"workbook", tone:"lilac" },
-  { id:"t8", title:"正数与负数概念巩固题单", focus:"理解实际意义，准确判断", reason:"七上第1章", questions:16, minutes:20, difficulty:"简单", source:"区教研精选", usage:762, tag:"chapter", tone:"sage" },
-  { id:"t9", title:"有理数运算基础过关题单", focus:"贴近教材知识链与能力层级", reason:"本地教辅", highlight:"精品", questions:20, minutes:25, difficulty:"中等", source:"知识能力与练习", usage:1143, tag:"workbook", tone:"cream" },
-  { id:"t10", title:"整式的加减基础题单", focus:"合并同类项与化简", reason:"七上第3章", questions:18, minutes:20, difficulty:"简单", source:"龙岗区教研室", usage:908, tag:"chapter", tone:"lilac" },
-  { id:"t11", title:"一元一次方程应用题单", focus:"顺序解题方法与实际应用", reason:"本校老师共建", questions:22, minutes:25, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"李老师", school:"启航实验学校", tone:"amber" }, usage:1221, tag:"school", tone:"mist" },
-  { id:"t12", title:"图形初步认识巩固题单", focus:"直线、射线和线段", reason:"七上第4章", questions:14, minutes:15, difficulty:"简单", source:"龙岗实验学校", author:{ name:"赵老师", school:"龙岗实验学校", tone:"mint" }, usage:669, tag:"school", tone:"sage" },
-  { id:"t13", title:"有理数混合运算提升题单", focus:"综合运算与技巧提升", reason:"七上第5章", questions:20, minutes:25, difficulty:"中等", source:"区教研精选", usage:1015, tag:"chapter", tone:"cream" },
-  { id:"t14", title:"2026 深圳福田区初一下期中考试", focus:"深圳真实阶段性考试，适合校准教学进度与难度", reason:"深圳区级真题", highlight:"最新", questions:20, minutes:35, difficulty:"较难", source:"福田区初一下期中真题", usage:984, tag:"paper", tone:"sage" },
-  { id:"t15", title:"坂田片区课堂小测精选题单", focus:"课堂检测，及时巩固", reason:"课堂小测", highlight:"最新", questions:12, minutes:15, difficulty:"简单", source:"坂田片区教研", author:{ name:"黄老师", school:"坂田实验学校", tone:"amber" }, usage:512, tag:"chapter", tone:"cream" },
-  { id:"t16", title:"月考精选题单", focus:"月考精选，重点突破", reason:"月考精选", questions:18, minutes:25, difficulty:"中等", source:"龙岗实验学校", author:{ name:"赵老师", school:"龙岗实验学校", tone:"mint" }, usage:1266, tag:"school", tone:"lilac" },
-  { id:"t17", title:"平湖片区数学教研精选题单", focus:"教研共建，优质共享", reason:"教研共建", highlight:"最新", questions:16, minutes:20, difficulty:"中等", source:"平湖片区教研", author:{ name:"刘老师", school:"平湖外国语学校", tone:"violet" }, usage:698, tag:"school", tone:"mist" },
-  { id:"t18", title:"深圳中考数学思维进阶", focus:"教材变式、探究题与优生挑战", reason:"巩固复习", highlight:"名师推荐", questions:22, minutes:35, difficulty:"较难", source:"深圳中考专题", usage:1374, tag:"special", tone:"sage" },
-  { id:"t19", title:"基础完成后的进阶提升题单", focus:"从课内基础过渡到探究与培优", reason:"提优配套", questions:18, minutes:30, difficulty:"中等", source:"常用提优训练系列", usage:831, tag:"workbook", tone:"cream" },
-  { id:"t20", title:"典型错法与方法点拨题单", focus:"归纳典型错法并配套针对变式", reason:"老师收藏较多", questions:16, minutes:25, difficulty:"中等", source:"易错方法系列", usage:742, tag:"workbook", tone:"lilac" },
-  { id:"t21", title:"期中错题重组题单", focus:"基于三个班真实易错题", reason:"本校老师共建", questions:15, minutes:22, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:96, tag:"school", tone:"mist" },
-  { id:"t22", title:"有理数课堂小测题单", focus:"当堂检测概念掌握情况", reason:"课堂小测", questions:8, minutes:5, difficulty:"简单", source:"龙城初级中学", author:{ name:"周老师", school:"龙城初级中学", tone:"rose" }, usage:728, tag:"chapter", tone:"sage" },
-  { id:"t23", title:"一元一次方程移项易错题单", focus:"集中突破移项与符号错误", reason:"高频易错", questions:14, minutes:18, difficulty:"中等", source:"区教研精选", usage:1186, tag:"chapter", tone:"cream" },
-  { id:"t24", title:"线段与角基础概念辨析题单", focus:"易混概念判断与规范表达", reason:"概念辨析", questions:12, minutes:15, difficulty:"简单", source:"龙岗实验学校", usage:635, tag:"chapter", tone:"lilac" },
-  { id:"t25", title:"2026 深圳罗湖区初一下期末考试", focus:"深圳真实阶段性考试，反映本地命题风格", reason:"深圳区级真题", highlight:"最新", questions:20, minutes:30, difficulty:"中等", source:"罗湖区初一下期末真题", usage:1458, tag:"paper", tone:"mist" },
-  { id:"t26", title:"整式运算同步巩固题单", focus:"同步巩固整式化简方法", reason:"热门系列", questions:18, minutes:25, difficulty:"中等", source:"原创新课堂", usage:884, tag:"workbook", tone:"sage" },
-  { id:"t27", title:"期末选择题快速提分题单", focus:"高频选择题与排除方法", reason:"本周热门", questions:16, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:1328, tag:"paper", tone:"cream" },
-  { id:"t28", title:"数学阅读理解情境题单", focus:"从真实情境中提取数量关系", reason:"情境专项", questions:10, minutes:22, difficulty:"较难", source:"区教研精选", usage:576, tag:"special", tone:"lilac" },
-  { id:"t29", title:"周末分层作业 A 组题单", focus:"面向基础薄弱学生巩固", reason:"基础巩固", questions:15, minutes:20, difficulty:"简单", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:168, tag:"school", tone:"mist" },
-  { id:"t30", title:"周末分层作业 B 组题单", focus:"基础巩固后的综合应用", reason:"综合应用", questions:18, minutes:28, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:152, tag:"school", tone:"sage" },
-  { id:"t31", title:"代数式实际意义专项题单", focus:"由情境列式并解释代数式", reason:"方法专项", questions:13, minutes:18, difficulty:"中等", source:"平湖片区教研", usage:692, tag:"special", tone:"cream" },
-  { id:"t32", title:"几何语言规范书写题单", focus:"训练符号语言与文字表达", reason:"规范表达专项", questions:12, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:804, tag:"special", tone:"lilac" },
-  { id:"t33", title:"期中考试压轴题拆解题单", focus:"按关键步骤拆解综合题", reason:"名校共建", questions:9, minutes:30, difficulty:"较难", source:"龙岗区四中联考", usage:1036, tag:"paper", tone:"mist" },
-  { id:"t34", title:"方程典型题型与变式题单", focus:"典型方程题型与变式训练", reason:"热门系列", questions:20, minutes:30, difficulty:"中等", source:"多维导学案", usage:916, tag:"workbook", tone:"sage" },
-  { id:"t35", title:"月考前查漏题单", focus:"快速覆盖本月教学重点", reason:"查漏补缺", highlight:"最新", questions:14, minutes:20, difficulty:"中等", source:"坂田片区教研", usage:1274, tag:"chapter", tone:"cream" },
-  { id:"t36", title:"公开课：有理数方法小测", focus:"从概念辨析到方法迁移的课堂练习", reason:"名校公开交流", highlight:"精品", questions:12, minutes:18, difficulty:"中等", source:"深圳中学", usage:1682, tag:"school", tone:"sage" },
-  { id:"t37", title:"期中压轴分层题单", focus:"按关键步骤拆分综合题，适合分层使用", reason:"名校教研共建", highlight:"精品", questions:10, minutes:28, difficulty:"较难", source:"深圳实验学校", usage:1436, tag:"school", tone:"cream" },
-  { id:"t38", title:"数学阅读情境题单", focus:"从真实语境中提取数量关系与条件", reason:"名校公开交流", highlight:"精品", questions:14, minutes:25, difficulty:"中等", source:"深圳外国语学校", usage:1298, tag:"school", tone:"lilac" },
-  { id:"t39", title:"几何表达训练", focus:"强化图形语言、推理步骤与规范书写", reason:"名校教研共建", highlight:"精品", questions:16, minutes:24, difficulty:"中等", source:"深圳高级中学初中部", usage:1184, tag:"school", tone:"mist" },
-  { id:"t40", title:"有理数概念基础过关题单", focus:"概念辨析、数轴表示与相反数", reason:"同步巩固", questions:16, minutes:20, difficulty:"简单", source:"知识能力与练习", usage:968, tag:"workbook", tone:"sage" },
-  { id:"t41", title:"有理数运算单元检测题单", focus:"覆盖运算法则、混合运算与实际应用", reason:"单元检测", highlight:"精品", questions:22, minutes:35, difficulty:"中等", source:"知识能力与练习", usage:1046, tag:"workbook", tone:"mist" },
-  { id:"t42", title:"整式加减课时同步题单", focus:"合并同类项与去括号课时训练", reason:"热门系列", questions:14, minutes:18, difficulty:"简单", source:"全品学练考", usage:786, tag:"workbook", tone:"cream" },
-  { id:"t43", title:"一元一次方程同步检测题单", focus:"从解方程到实际问题的阶段检测", reason:"热门系列", questions:20, minutes:30, difficulty:"中等", source:"全品学练考", usage:852, tag:"workbook", tone:"lilac" },
-  { id:"t44", title:"有理数思维进阶题单", focus:"从基础运算过渡到规律探究", reason:"能力提高", questions:15, minutes:28, difficulty:"较难", source:"常用提优训练系列", usage:734, tag:"workbook", tone:"sage" },
-  { id:"t45", title:"方程应用培优题单", focus:"复杂数量关系与多步骤建模", reason:"培优专题", questions:12, minutes:30, difficulty:"较难", source:"常用提优训练系列", usage:698, tag:"workbook", tone:"cream" },
-  { id:"t46", title:"有理数符号易错二练题单", focus:"定位符号错误并完成针对变式", reason:"易错二练", questions:16, minutes:22, difficulty:"中等", source:"易错方法系列", usage:824, tag:"workbook", tone:"lilac" },
-  { id:"t47", title:"方程移项错法点拨题单", focus:"集中解决移项、去分母与检验问题", reason:"错法点拨", questions:14, minutes:24, difficulty:"中等", source:"易错方法系列", usage:778, tag:"workbook", tone:"mist" },
-  { id:"t48", title:"整式加减同步方法题单", focus:"围绕课时重点进行方法归纳", reason:"热门系列", questions:15, minutes:20, difficulty:"中等", source:"原创新课堂", usage:812, tag:"workbook", tone:"sage" },
-  { id:"t49", title:"几何初步同步方法题单", focus:"直线、射线、线段与角的规范表达", reason:"热门系列", questions:16, minutes:22, difficulty:"中等", source:"原创新课堂", usage:744, tag:"workbook", tone:"cream" },
-  { id:"t50", title:"一元一次方程题型突破题单", focus:"分类掌握方程典型题型和变式", reason:"热门系列", questions:18, minutes:28, difficulty:"中等", source:"多维导学案", usage:936, tag:"workbook", tone:"lilac" },
-  { id:"t51", title:"几何语言专题训练题单", focus:"训练几何语言转换与推理书写", reason:"热门系列", questions:14, minutes:24, difficulty:"中等", source:"多维导学案", usage:868, tag:"workbook", tone:"mist" }
+  { id:"hero", title:"2026 龙岗七上期末冲刺：高频考点与压轴分层", focus:"覆盖必考基础、常见易错和综合拓展，适合期末冲刺前完成一次系统复习。", reason:"龙岗区教研精选 · 今日更新", questions:24, minutes:45, difficulty:"中等", source:"龙岗区教研中心", usage:3642, tag:"paper", tone:"deep" },
+  { id:"t1", title:"龙岗易错二练：有理数符号与运算", focus:"错因诊断、针对变式、二次过关", reason:"龙岗易错二练", questions:15, minutes:20, difficulty:"中等", source:"龙岗区易错专题", usage:386, tag:"special", tone:"sage" },
+  { id:"t2", title:"2026 深圳南山区初一上期末数学真题", focus:"本地命题风格与阶段难度参考", reason:"深圳区级真题", highlight:"精品", questions:22, minutes:40, difficulty:"中等", source:"南山区初一上期末真题", usage:1206, tag:"paper", tone:"cream" },
+  { id:"t3", title:"深圳情境数学：代数式建模专项题单", focus:"深圳真实情境改编，考点不变、题面更新", reason:"深圳情境题", highlight:"名师推荐", questions:12, minutes:25, difficulty:"中等", source:"深圳情境题专题", usage:842, tag:"special", tone:"lilac" },
+  { id:"t4", title:"2024—2026 深圳期末真题汇编：轴对称", focus:"把分散真题整理成可直接使用的课内专题", reason:"真题汇编", highlight:"精品", questions:24, minutes:35, difficulty:"较难", source:"深圳初一下期末真题", usage:1532, tag:"paper", tone:"mist" },
+  { id:"t5", title:"2025—2026 深圳期末真题汇编：全等三角形", focus:"按考点重组近两年深圳区级真题", reason:"真题汇编", highlight:"精品", questions:18, minutes:30, difficulty:"中等", source:"深圳初一下期末真题", usage:613, tag:"special", tone:"sage" },
+  { id:"t6", title:"初一期末高频易错周测题单", focus:"名校周测，适合分层选题与命题参考", reason:"名校资源", highlight:"精品", questions:18, minutes:30, difficulty:"较难", source:"深圳外国语学校龙岗学校", usage:1089, tag:"paper", tone:"cream" },
+  { id:"t7", title:"整式运算高频易错巩固题单", focus:"整式运算常见错误归纳", reason:"热门系列", questions:14, minutes:20, difficulty:"中等", source:"全品学练考", usage:522, tag:"workbook", tone:"lilac" },
+  { id:"t8", title:"正负数实际意义与数轴过关题单", focus:"理解实际意义，准确判断", reason:"七上第1章", questions:16, minutes:20, difficulty:"简单", source:"区教研精选", usage:762, tag:"chapter", tone:"sage" },
+  { id:"t9", title:"有理数运算基础过关与易错自测", focus:"贴近教材知识链与能力层级", reason:"本地教辅", highlight:"精品", questions:20, minutes:25, difficulty:"中等", source:"知识能力与练习", usage:1143, tag:"workbook", tone:"cream" },
+  { id:"t10", title:"整式加减：合并同类项与去括号过关", focus:"合并同类项与化简", reason:"七上第3章", questions:18, minutes:20, difficulty:"简单", source:"龙岗区教研室", usage:908, tag:"chapter", tone:"lilac" },
+  { id:"t11", title:"一元一次方程应用：审题建模专项", focus:"顺序解题方法与实际应用", reason:"本校老师共建", questions:22, minutes:25, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"李老师", school:"启航实验学校", tone:"amber" }, usage:1221, tag:"school", tone:"mist" },
+  { id:"t12", title:"几何初步：图形语言与概念辨析", focus:"直线、射线和线段", reason:"七上第4章", questions:14, minutes:15, difficulty:"简单", source:"龙岗区实验学校", author:{ name:"赵老师", school:"龙岗区实验学校", tone:"mint" }, usage:669, tag:"school", tone:"sage" },
+  { id:"t13", title:"有理数混合运算：方法进阶与提速", focus:"综合运算与技巧提升", reason:"七上第5章", questions:20, minutes:25, difficulty:"中等", source:"区教研精选", usage:1015, tag:"chapter", tone:"cream" },
+  { id:"t14", title:"2026 深圳福田区初一下期中数学真题", focus:"深圳真实阶段性考试，适合校准教学进度与难度", reason:"深圳区级真题", highlight:"最新", questions:20, minutes:35, difficulty:"较难", source:"福田区初一下期中真题", usage:984, tag:"paper", tone:"sage" },
+  { id:"t15", title:"坂田片区七上课堂小测：整式加减", focus:"课堂检测，及时巩固", reason:"课堂小测", highlight:"最新", questions:12, minutes:15, difficulty:"简单", source:"坂田片区教研", author:{ name:"黄老师", school:"坂田实验学校", tone:"amber" }, usage:512, tag:"chapter", tone:"cream" },
+  { id:"t16", title:"月考前查漏补缺：七上核心考点精选", focus:"月考精选，重点突破", reason:"月考精选", questions:18, minutes:25, difficulty:"中等", source:"龙岗区实验学校", author:{ name:"赵老师", school:"龙岗区实验学校", tone:"mint" }, usage:1266, tag:"school", tone:"lilac" },
+  { id:"t17", title:"七上易错题二次过关：概念到变式", focus:"教研共建，优质共享", reason:"教研共建", highlight:"最新", questions:16, minutes:20, difficulty:"中等", source:"平湖片区教研", author:{ name:"刘老师", school:"平湖外国语学校", tone:"violet" }, usage:698, tag:"school", tone:"mist" },
+  { id:"t18", title:"深圳中考衔接：数与式思维进阶题单", focus:"教材变式、探究题与优生挑战", reason:"巩固复习", highlight:"名师推荐", questions:22, minutes:35, difficulty:"较难", source:"深圳中考专题", usage:1374, tag:"special", tone:"sage" },
+  { id:"t19", title:"课内基础到探究题：进阶提升题单", focus:"从课内基础过渡到探究与培优", reason:"提优配套", questions:18, minutes:30, difficulty:"中等", source:"常用提优训练系列", usage:831, tag:"workbook", tone:"cream" },
+  { id:"t20", title:"典型错法拆解：有理数与方程方法点拨", focus:"归纳典型错法并配套针对变式", reason:"老师收藏较多", questions:16, minutes:25, difficulty:"中等", source:"易错方法系列", usage:742, tag:"workbook", tone:"lilac" },
+  { id:"t21", title:"期中错题重组：三个班高频失分题", focus:"基于三个班真实易错题", reason:"本校老师共建", questions:15, minutes:22, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:96, tag:"school", tone:"mist" },
+  { id:"t22", title:"有理数课堂 5 分钟诊断题单", focus:"当堂检测概念掌握情况", reason:"课堂小测", questions:8, minutes:5, difficulty:"简单", source:"龙城初级中学", author:{ name:"周老师", school:"龙城初级中学", tone:"rose" }, usage:728, tag:"chapter", tone:"sage" },
+  { id:"t23", title:"一元一次方程移项与符号易错专练", focus:"集中突破移项与符号错误", reason:"高频易错", questions:14, minutes:18, difficulty:"中等", source:"区教研精选", usage:1186, tag:"chapter", tone:"cream" },
+  { id:"t24", title:"线段与角：易混概念辨析与规范表达", focus:"易混概念判断与规范表达", reason:"概念辨析", questions:12, minutes:15, difficulty:"简单", source:"龙岗区实验学校", usage:635, tag:"chapter", tone:"lilac" },
+  { id:"t25", title:"2026 深圳罗湖区初一下期末数学真题", focus:"深圳真实阶段性考试，反映本地命题风格", reason:"深圳区级真题", highlight:"最新", questions:20, minutes:30, difficulty:"中等", source:"罗湖区初一下期末真题", usage:1458, tag:"paper", tone:"mist" },
+  { id:"t26", title:"整式运算同步精练：基础到综合", focus:"同步巩固整式化简方法", reason:"热门系列", questions:18, minutes:25, difficulty:"中等", source:"原创新课堂", usage:884, tag:"workbook", tone:"sage" },
+  { id:"t27", title:"期末选择题高频考法与快速提分", focus:"高频选择题与排除方法", reason:"本周热门", questions:16, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:1328, tag:"paper", tone:"cream" },
+  { id:"t28", title:"数学阅读理解：真实情境信息提取", focus:"从真实情境中提取数量关系", reason:"情境专项", questions:10, minutes:22, difficulty:"较难", source:"区教研精选", usage:576, tag:"special", tone:"lilac" },
+  { id:"t29", title:"周末分层作业 A：基础巩固与补弱", focus:"面向基础薄弱学生巩固", reason:"基础巩固", questions:15, minutes:20, difficulty:"简单", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:168, tag:"school", tone:"mist" },
+  { id:"t30", title:"周末分层作业 B：综合应用与提升", focus:"基础巩固后的综合应用", reason:"综合应用", questions:18, minutes:28, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:152, tag:"school", tone:"sage" },
+  { id:"t31", title:"代数式建模：真实情境列式专项", focus:"由情境列式并解释代数式", reason:"方法专项", questions:13, minutes:18, difficulty:"中等", source:"平湖片区教研", usage:692, tag:"special", tone:"cream" },
+  { id:"t32", title:"几何语言：符号转换与规范书写专项", focus:"训练符号语言与文字表达", reason:"规范表达专项", questions:12, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:804, tag:"special", tone:"lilac" },
+  { id:"t33", title:"期中压轴题：关键步骤分层拆解", focus:"按关键步骤拆解综合题", reason:"名校共建", questions:9, minutes:30, difficulty:"较难", source:"龙岗区四中联考", usage:1036, tag:"paper", tone:"mist" },
+  { id:"t34", title:"一元一次方程：典型题型与变式突破", focus:"典型方程题型与变式训练", reason:"热门系列", questions:20, minutes:30, difficulty:"中等", source:"多维导学案", usage:916, tag:"workbook", tone:"sage" },
+  { id:"t35", title:"月考前 20 分钟查漏：本月高频易错", focus:"快速覆盖本月教学重点", reason:"查漏补缺", highlight:"最新", questions:14, minutes:20, difficulty:"中等", source:"坂田片区教研", usage:1274, tag:"chapter", tone:"cream" },
+  { id:"t36", title:"七上有理数方法：公开课配套小测", focus:"从概念辨析到方法迁移的课堂练习", reason:"名校公开交流", highlight:"精品", questions:12, minutes:18, difficulty:"中等", source:"深圳中学龙岗学校", usage:1682, tag:"school", tone:"sage" },
+  { id:"t37", title:"期中压轴题：关键步骤与分层选题", focus:"按关键步骤拆分综合题，适合分层使用", reason:"名校教研共建", highlight:"精品", questions:10, minutes:28, difficulty:"较难", source:"龙岗区实验学校", usage:1436, tag:"school", tone:"cream" },
+  { id:"t38", title:"数学阅读与真实情境建模题单", focus:"从真实语境中提取数量关系与条件", reason:"名校公开交流", highlight:"精品", questions:14, minutes:25, difficulty:"中等", source:"龙岗区外国语学校", usage:1298, tag:"school", tone:"lilac" },
+  { id:"t39", title:"几何语言规范与推理进阶题单", focus:"强化图形语言、推理步骤与规范书写", reason:"名校教研共建", highlight:"精品", questions:16, minutes:24, difficulty:"中等", source:"龙城初级中学", usage:1184, tag:"school", tone:"mist" },
+  { id:"t40", title:"有理数概念：数轴、相反数与绝对值过关", focus:"概念辨析、数轴表示与相反数", reason:"同步巩固", questions:16, minutes:20, difficulty:"简单", source:"知识能力与练习", usage:968, tag:"workbook", tone:"sage" },
+  { id:"t41", title:"有理数单元检测：运算、应用与探究", focus:"覆盖运算法则、混合运算与实际应用", reason:"单元检测", highlight:"精品", questions:22, minutes:35, difficulty:"中等", source:"知识能力与练习", usage:1046, tag:"workbook", tone:"mist" },
+  { id:"t42", title:"整式加减课时精练：去括号与合并同类项", focus:"合并同类项与去括号课时训练", reason:"热门系列", questions:14, minutes:18, difficulty:"简单", source:"全品学练考", usage:786, tag:"workbook", tone:"cream" },
+  { id:"t43", title:"一元一次方程同步检测：解法与应用", focus:"从解方程到实际问题的阶段检测", reason:"热门系列", questions:20, minutes:30, difficulty:"中等", source:"全品学练考", usage:852, tag:"workbook", tone:"lilac" },
+  { id:"t44", title:"有理数规律探究与思维进阶", focus:"从基础运算过渡到规律探究", reason:"能力提高", questions:15, minutes:28, difficulty:"较难", source:"常用提优训练系列", usage:734, tag:"workbook", tone:"sage" },
+  { id:"t45", title:"方程应用培优：复杂数量关系建模", focus:"复杂数量关系与多步骤建模", reason:"培优专题", questions:12, minutes:30, difficulty:"较难", source:"常用提优训练系列", usage:698, tag:"workbook", tone:"cream" },
+  { id:"t46", title:"有理数符号易错二练：错因到变式", focus:"定位符号错误并完成针对变式", reason:"易错二练", questions:16, minutes:22, difficulty:"中等", source:"易错方法系列", usage:824, tag:"workbook", tone:"lilac" },
+  { id:"t47", title:"方程移项、去分母与检验错法点拨", focus:"集中解决移项、去分母与检验问题", reason:"错法点拨", questions:14, minutes:24, difficulty:"中等", source:"易错方法系列", usage:778, tag:"workbook", tone:"mist" },
+  { id:"t48", title:"整式加减同步方法：易错点与变式", focus:"围绕课时重点进行方法归纳", reason:"热门系列", questions:15, minutes:20, difficulty:"中等", source:"原创新课堂", usage:812, tag:"workbook", tone:"sage" },
+  { id:"t49", title:"几何初步同步方法：图形语言与推理", focus:"直线、射线、线段与角的规范表达", reason:"热门系列", questions:16, minutes:22, difficulty:"中等", source:"原创新课堂", usage:744, tag:"workbook", tone:"cream" },
+  { id:"t50", title:"一元一次方程题型突破：解法到应用", focus:"分类掌握方程典型题型和变式", reason:"热门系列", questions:18, minutes:28, difficulty:"中等", source:"多维导学案", usage:936, tag:"workbook", tone:"lilac" },
+  { id:"t51", title:"几何语言专题：读图、转换与规范表达", focus:"训练几何语言转换与推理书写", reason:"热门系列", questions:14, minutes:24, difficulty:"中等", source:"多维导学案", usage:868, tag:"workbook", tone:"mist" }
 ];
 
 const byId = Object.fromEntries(topics.map(topic => [topic.id, topic]));
@@ -171,20 +171,6 @@ function shelf(title, subtitle, ids) {
     </section>`;
 }
 
-function localUpdateStrip() {
-  return `
-    <section class="local-update-strip" aria-label="龙岗题库更新概况">
-      <div class="update-strip-title">
-        <span class="live-dot"></span>
-        <span><b>龙岗七年级资源持续更新</b><small>最近更新于 10 分钟前</small></span>
-      </div>
-      <div class="update-strip-stat"><strong>1,286</strong><span>份题单</span></div>
-      <div class="update-strip-stat"><strong>68</strong><span>今日新增</span></div>
-      <div class="update-strip-stat"><strong>126</strong><span>深圳真题</span></div>
-      <div class="update-strip-stat"><strong>3,642</strong><span>位老师使用</span></div>
-    </section>`;
-}
-
 function recommendationCard(topic, reason) {
   const source = topic.author ? `${topic.author.name} · ${topic.author.school}` : topic.source;
   return `
@@ -221,7 +207,6 @@ function personalizedFirstScreenSection() {
       <article class="personalized-recommendations">
         <header class="personalized-heading">
           <div><h2>为你推荐</h2></div>
-          <span><i class="ri-refresh-line"></i> 随教学进度更新</span>
         </header>
         <div class="personalized-grid">
           ${recommendationCard(byId.t20, "你最近使用过")}
@@ -256,7 +241,6 @@ function personalizedRecommendationSection() {
     <section class="personalized-recommendations recommendation-section-alone" aria-label="个性化题单推荐">
       <header class="personalized-heading">
         <div><h2>为你推荐</h2></div>
-        <span><i class="ri-refresh-line"></i> 随教学进度更新</span>
       </header>
       <div class="personalized-grid">
         ${recommendationCard(byId.t20, "你最近使用过")}
@@ -381,14 +365,22 @@ function activityRankingSection() {
   return `
     <section class="activity-ranking-section">
       <div class="ranking-split">
-        <article class="ranking-panel">
-          <header><div><b>本周热用</b><span>使用次数增长最快</span></div><em>TOP 6</em></header>
-          ${hot.map(([topic, meta], index) => activityRankingRow(topic, index + 1, meta)).join("")}
-        </article>
-        <article class="ranking-panel latest">
-          <header><div><b>最新题单</b></div><em>NEW 6</em></header>
-          ${latest.map(([topic, meta], index) => activityRankingRow(topic, index + 1, meta)).join("")}
-        </article>
+        <div class="ranking-column">
+          <header class="shelf-header ranking-external-heading">
+            <div class="shelf-title"><h2>热门题单</h2></div>
+          </header>
+          <article class="ranking-panel">
+            ${hot.map(([topic, meta], index) => activityRankingRow(topic, index + 1, meta)).join("")}
+          </article>
+        </div>
+        <div class="ranking-column">
+          <header class="shelf-header ranking-external-heading">
+            <div class="shelf-title"><h2>最新题单</h2></div>
+          </header>
+          <article class="ranking-panel latest">
+            ${latest.map(([topic, meta], index) => activityRankingRow(topic, index + 1, meta)).join("")}
+          </article>
+        </div>
       </div>
     </section>`;
 }
@@ -396,11 +388,11 @@ function activityRankingSection() {
 function homepageSeriesSection() {
   const seriesGroups = [
     {
-      name:"知识能力与练习", shortName:"知识能力", teacher:"周老师", teacherTone:"mint",
+      name:"知识能力与练习", teacher:"周老师", teacherTone:"mint",
       count:26, ids:["t9","t40","t41"], accent:"#326c55", wash:"#e7f1eb"
     },
     {
-      name:"全品学练考", shortName:"学练考", teacher:"林老师", teacherTone:"amber",
+      name:"全品学练考", teacher:"林老师", teacherTone:"amber",
       count:18, ids:["t7","t42","t43"], accent:"#9a7040", wash:"#f5eadc"
     }
   ];
@@ -413,17 +405,13 @@ function homepageSeriesSection() {
       <div class="series-volume-grid">
         ${seriesGroups.map(item => `
           <article class="series-volume-card" style="--volume-accent:${item.accent};--volume-wash:${item.wash}">
-            <button class="volume-cover" data-series="${item.name}" aria-label="查看${item.name}全部题单">
-              <span>题单系列</span>
-              <i class="ri-book-open-line"></i>
-              <b>${item.shortName}</b>
-              <small>七年级数学</small>
-              <em>${item.count} 份题单</em>
-            </button>
             <div class="volume-catalog">
               <header>
                 <div class="volume-series-identity">
-                  <button class="volume-series-name" data-series="${item.name}"><b>${item.name}</b></button>
+                  <button class="volume-series-name" data-series="${item.name}">
+                    <span class="volume-series-icon"><i class="ri-book-2-line"></i></span>
+                    <b>${item.name}</b>
+                  </button>
                   <button class="volume-series-teacher" data-author="${item.teacher}">
                     <span class="teacher-avatar ${item.teacherTone}">${item.teacher.slice(0, 1)}</span>
                     <span>${item.teacher}</span>
@@ -439,10 +427,12 @@ function homepageSeriesSection() {
                       <span><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.difficulty}</small></span>
                       <strong>${topic.usage.toLocaleString()} 人使用</strong>
                       <i class="ri-arrow-right-s-line"></i>
-                    </button>`;
+                  </button>`;
                 }).join("")}
               </div>
-              <button class="volume-view-all" data-series="${item.name}">查看该系列全部题单 <i class="ri-arrow-right-line"></i></button>
+              <button class="volume-view-all" data-series="${item.name}">
+                <span>共 ${item.count} 份题单</span><span>·</span><b>查看全部</b><i class="ri-arrow-right-line"></i>
+              </button>
             </div>
           </article>`).join("")}
       </div>
@@ -455,7 +445,6 @@ function famousSchoolSection() {
     <section class="famous-school-section">
       <header class="shelf-header">
         <div class="shelf-title"><h2>名校资源</h2></div>
-        <span class="school-proof">5 所学校 · 本周新增 16 份</span>
       </header>
       <div class="famous-school-grid">
         ${schoolResources.map(topic => `
@@ -473,7 +462,6 @@ function teacherContributionSection() {
     <section class="teacher-contribution-section">
       <header class="shelf-header">
         <div class="shelf-title"><h2>本校资源</h2></div>
-        <span class="school-proof">启航实验学校 · 本周新增 18 份</span>
       </header>
       <div class="teacher-contribution-grid">
         ${teacherTopics.map(topic => `
@@ -603,7 +591,7 @@ const infiniteTopicIds = [...new Set([
 function infiniteFeedMarkup() {
   return `
     <section class="endless-batch">
-      <header class="shelf-header"><div class="shelf-title"><h2>题单广场</h2></div><span class="batch-mark"><b data-feed-result-count>30+</b> 份可浏览</span></header>
+      <header class="shelf-header"><div class="shelf-title"><h2>题单广场</h2></div></header>
       <div class="square-filter-panel" aria-label="题单广场筛选">
         <div class="square-filter-row">
           <span>类型</span>
@@ -753,7 +741,6 @@ function setupInfiniteFeed() {
 
 function renderDefaultFeed() {
   return [
-    localUpdateStrip(),
     homepageSeriesSection(),
     famousSchoolSection(),
     teacherContributionSection(),
