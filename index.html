@@ -32,8 +32,10 @@
           <button data-filter="special" role="tab" aria-selected="false"><i class="ri-focus-3-line"></i><span>专项练习</span><em>418</em></button>
           <button data-filter="paper" role="tab" aria-selected="false"><i class="ri-file-list-3-line"></i><span>试卷题单</span><em>126</em></button>
           <button data-filter="workbook" role="tab" aria-selected="false"><i class="ri-book-shelf-line"></i><span>系列题单</span><em>186</em></button>
-          <button data-filter="school" role="tab" aria-selected="false"><i class="ri-school-line"></i><span>本区/本校</span><em>92</em></button>
         </div>
+        <a class="school-library-entry" href="./school.html">
+          <i class="ri-school-line"></i><span>本校题库</span><i class="ri-arrow-right-s-line"></i>
+        </a>
       </section>
 
       <div id="emptyState" class="empty-state" hidden>
@@ -50,7 +52,7 @@
 
     <form id="aiDock" class="ai-dock" aria-label="AI 生成题单">
       <button id="aiAdd" class="ai-dock-icon" type="button" aria-label="添加材料"><i class="ri-add-line"></i></button>
-      <input id="aiQuickInput" class="ai-quick-input" placeholder="描述你想要的题单，例如：20 分钟的有理数易错练习" />
+      <input id="aiQuickInput" class="ai-quick-input" placeholder="描述你想要的题单，例如：一份有理数易错练习" />
       <button id="aiVoice" class="ai-voice-button" type="button" aria-label="语音输入"><i class="ri-mic-line"></i></button>
       <button id="openAi" class="ai-dock-action" type="submit" aria-label="生成题单"><i class="ri-arrow-up-line"></i></button>
     </form>
@@ -133,19 +135,18 @@
           <div class="context-tags"><span>七年级数学</span><span>人教版上册</span><span>深圳市龙岗区</span></div>
           <label class="prompt-box">
             <span>这次想练什么？</span>
-            <textarea>生成一份20分钟的有理数易错题单，基础题为主，包含3道符号判断题。</textarea>
+            <textarea>生成一份有理数易错题单，基础题为主，包含3道符号判断题。</textarea>
           </label>
           <div class="select-grid">
             <label><span>使用场景</span><select><option>课后巩固</option><option>课堂练习</option><option>单元检测</option></select></label>
             <label><span>整体难度</span><select><option>基础—中等</option><option>基础为主</option><option>中等—提高</option></select></label>
-            <label><span>预计时长</span><select><option>20 分钟</option><option>30 分钟</option><option>45 分钟</option></select></label>
           </div>
           <button id="generateList" class="generate-button"><i class="ri-sparkling-2-line"></i><span>生成完整题单</span></button>
         </div>
         <div id="aiResult" hidden>
           <p class="modal-kicker"><i class="ri-check-line"></i> 已生成，可继续调整</p>
           <h2>七上有理数易错巩固题单</h2>
-          <p class="modal-copy">共 12 题，预计 20 分钟。优先使用龙岗区优质资源，并补充 2 道 AI 变式题。</p>
+          <p class="modal-copy">共 12 题。优先使用龙岗区优质资源，并补充 2 道 AI 变式题。</p>
           <div class="generated-outline">
             <div><span>01</span><b>正负数意义</b><small>3 题 · 基础</small><button>调整</button></div>
             <div><span>02</span><b>符号判断</b><small>3 题 · 易错</small><button>调整</button></div>

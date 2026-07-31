@@ -21,7 +21,7 @@ const topics = [
   { id:"t19", title:"课内基础到探究题：进阶提升题单", focus:"从课内基础过渡到探究与培优", reason:"提优配套", questions:18, minutes:30, difficulty:"中等", source:"常用提优训练系列", usage:831, tag:"workbook", tone:"cream" },
   { id:"t20", title:"典型错法拆解：有理数与方程方法点拨", focus:"归纳典型错法并配套针对变式", reason:"老师收藏较多", questions:16, minutes:25, difficulty:"中等", source:"易错方法系列", usage:742, tag:"workbook", tone:"lilac" },
   { id:"t21", title:"期中错题重组：三个班高频失分题", focus:"基于三个班真实易错题", reason:"本校老师共建", questions:15, minutes:22, difficulty:"中等", source:"启航实验学校数学组", author:{ name:"陈老师", school:"启航实验学校", tone:"blue" }, usage:96, tag:"school", tone:"mist" },
-  { id:"t22", title:"有理数课堂 5 分钟诊断题单", focus:"当堂检测概念掌握情况", reason:"课堂小测", questions:8, minutes:5, difficulty:"简单", source:"龙城初级中学", author:{ name:"周老师", school:"龙城初级中学", tone:"rose" }, usage:728, tag:"chapter", tone:"sage" },
+  { id:"t22", title:"有理数课堂诊断题单", focus:"当堂检测概念掌握情况", reason:"课堂小测", questions:8, minutes:5, difficulty:"简单", source:"龙城初级中学", author:{ name:"周老师", school:"龙城初级中学", tone:"rose" }, usage:728, tag:"chapter", tone:"sage" },
   { id:"t23", title:"一元一次方程移项与符号易错专练", focus:"集中突破移项与符号错误", reason:"高频易错", questions:14, minutes:18, difficulty:"中等", source:"区教研精选", usage:1186, tag:"chapter", tone:"cream" },
   { id:"t24", title:"线段与角：易混概念辨析与规范表达", focus:"易混概念判断与规范表达", reason:"概念辨析", questions:12, minutes:15, difficulty:"简单", source:"龙岗区实验学校", usage:635, tag:"chapter", tone:"lilac" },
   { id:"t25", title:"2026 深圳罗湖区初一下期末数学真题", focus:"深圳真实阶段性考试，反映本地命题风格", reason:"深圳区级真题", highlight:"最新", questions:20, minutes:30, difficulty:"中等", source:"罗湖区初一下期末真题", usage:1458, tag:"paper", tone:"mist" },
@@ -34,7 +34,7 @@ const topics = [
   { id:"t32", title:"几何语言：符号转换与规范书写专项", focus:"训练符号语言与文字表达", reason:"规范表达专项", questions:12, minutes:20, difficulty:"中等", source:"龙岗区教研室", usage:804, tag:"special", tone:"lilac" },
   { id:"t33", title:"期中压轴题：关键步骤分层拆解", focus:"按关键步骤拆解综合题", reason:"名校共建", questions:9, minutes:30, difficulty:"较难", source:"龙岗区四中联考", usage:1036, tag:"paper", tone:"mist" },
   { id:"t34", title:"一元一次方程：典型题型与变式突破", focus:"典型方程题型与变式训练", reason:"热门系列", questions:20, minutes:30, difficulty:"中等", source:"多维导学案", usage:916, tag:"workbook", tone:"sage" },
-  { id:"t35", title:"月考前 20 分钟查漏：本月高频易错", focus:"快速覆盖本月教学重点", reason:"查漏补缺", highlight:"最新", questions:14, minutes:20, difficulty:"中等", source:"坂田片区教研", usage:1274, tag:"chapter", tone:"cream" },
+  { id:"t35", title:"月考前查漏：本月高频易错", focus:"快速覆盖本月教学重点", reason:"查漏补缺", highlight:"最新", questions:14, minutes:20, difficulty:"中等", source:"坂田片区教研", usage:1274, tag:"chapter", tone:"cream" },
   { id:"t36", title:"七上有理数方法：公开课配套小测", focus:"从概念辨析到方法迁移的课堂练习", reason:"名校公开交流", highlight:"精品", questions:12, minutes:18, difficulty:"中等", source:"深圳中学龙岗学校", usage:1682, tag:"school", tone:"sage" },
   { id:"t37", title:"期中压轴题：关键步骤与分层选题", focus:"按关键步骤拆分综合题，适合分层使用", reason:"名校教研共建", highlight:"精品", questions:10, minutes:28, difficulty:"较难", source:"龙岗区实验学校", usage:1436, tag:"school", tone:"cream" },
   { id:"t38", title:"数学阅读与真实情境建模题单", focus:"从真实语境中提取数量关系与条件", reason:"名校公开交流", highlight:"精品", questions:14, minutes:25, difficulty:"中等", source:"龙岗区外国语学校", usage:1298, tag:"school", tone:"lilac" },
@@ -118,7 +118,7 @@ function topicCard(topic) {
         <h3>${topic.title}</h3>
       </div>
       <div class="card-body">
-        <div class="card-meta"><span>${topic.questions} 题</span><span>${topic.minutes} 分钟</span><span>${topic.difficulty}</span></div>
+        <div class="card-meta"><span>${topic.questions} 题</span><span>${topic.difficulty}</span></div>
         <div class="card-footer">
           ${sourceMarkup(topic)}
           <span class="card-usage">${topic.usage.toLocaleString()} 人使用</span>
@@ -132,7 +132,7 @@ function compactRow(topic, rank, metric = "") {
   return `
     <button class="compact-row" data-topic="${topic.id}">
       <span class="rank rank-${rank}">${String(rank).padStart(2, "0")}</span>
-      <span class="compact-main"><b>${topic.title}</b><small>${topic.source} · ${topic.questions}题 · ${topic.minutes}分钟</small></span>
+      <span class="compact-main"><b>${topic.title}</b><small>${topic.source} · ${topic.questions}题</small></span>
       <strong>${metric || `${topic.usage.toLocaleString()}次使用`}</strong>
       <i class="ri-arrow-right-s-line"></i>
     </button>`;
@@ -177,7 +177,7 @@ function recommendationCard(topic, reason) {
     <button class="recommend-card" data-topic="${topic.id}" style="--tone:${toneMap[topic.tone]}">
       <span class="recommend-reason"><i class="ri-sparkling-2-line"></i>${reason}</span>
       <strong>${topic.title}</strong>
-      <small class="recommend-brief">${topic.questions} 题 · ${topic.minutes} 分钟 · ${source}</small>
+      <small class="recommend-brief">${topic.questions} 题 · ${source}</small>
       <em class="recommend-usage">${topic.usage.toLocaleString()} 人使用</em>
     </button>`;
 }
@@ -193,7 +193,7 @@ function rankingRow(topic, rank, mode = "hot") {
         ${heated ? '<i class="ri-fire-fill"></i>' : ""}
         <em>${String(rank).padStart(2, "0")}</em>
       </span>
-      <span class="compact-main"><b>${topic.title}</b><small>${topic.source} · ${topic.questions}题 · ${topic.minutes}分钟</small></span>
+      <span class="compact-main"><b>${topic.title}</b><small>${topic.source} · ${topic.questions}题</small></span>
       <strong>${metric}</strong>
       <i class="ri-arrow-right-s-line"></i>
     </button>`;
@@ -279,7 +279,7 @@ function syncPracticeSection() {
             <button class="chapter-topic-row" data-topic="${topic.id}">
               <span class="chapter-order">${String(index + 1).padStart(2,"0")}</span>
               <span><b>${topic.title}</b><small>${topic.focus}</small></span>
-              <em>${topic.questions} 题 · ${topic.minutes} 分钟</em>
+              <em>${topic.questions} 题 · ${topic.difficulty}</em>
               <strong>${topic.usage.toLocaleString()} 人使用</strong>
               <i class="ri-arrow-right-s-line"></i>
             </button>`).join("")}
@@ -299,10 +299,6 @@ function seriesCategoryView() {
   ];
   return `
     <section class="category-detail series-category-view">
-      <header class="detail-heading">
-        <div><p>按熟悉的系列找</p><h1>系列题单</h1><span>同一系列可包含同步、专项与阶段检测题单</span></div>
-        <strong>186 <small>份题单</small></strong>
-      </header>
       <div class="series-panel-heading">
         <div><b>先看题单，再进入系列</b><span>点击题单下方的系列名称，可查看该系列的全部题单</span></div>
         <label class="series-search"><i class="ri-search-line"></i><input data-series-search placeholder="搜索系列或题单名称" /></label>
@@ -424,7 +420,7 @@ function homepageSeriesSection() {
                   return `
                     <button data-topic="${topic.id}">
                       <span class="volume-topic-index">${String(index + 1).padStart(2, "0")}</span>
-                      <span><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.difficulty}</small></span>
+                      <span><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.difficulty}</small></span>
                       <strong>${topic.usage.toLocaleString()} 人使用</strong>
                       <i class="ri-arrow-right-s-line"></i>
                   </button>`;
@@ -449,34 +445,77 @@ function famousSchoolSection() {
       <div class="famous-school-grid">
         ${schoolResources.map(topic => `
           <button class="famous-school-card" data-topic="${topic.id}">
-            <span class="school-resource-main"><em>${topic.source}</em><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.focus}</small></span>
+            <span class="school-resource-main"><em>${topic.source}</em><b>${topic.title}</b><small>${topic.questions} 题 · ${topic.focus}</small></span>
             <span class="school-card-footer"><strong>${topic.usage.toLocaleString()} 位老师使用</strong><i class="ri-arrow-right-s-line"></i></span>
           </button>`).join("")}
       </div>
     </section>`;
 }
 
-function teacherContributionSection() {
-  const teacherTopics = [byId.t21, byId.t29, byId.t30, byId.t11];
+function teacherContributionSection(showFullLibrary = false) {
+  const teacherTopics = [
+    [byId.t21, "七（3）班"],
+    [byId.t29, "七（1）班"],
+    [byId.t30, "七（2）班"],
+    [byId.t11, "七（3）班"]
+  ];
+  const schoolQuestions = [
+    { id:"q1", title:"有理数混合运算：负号漏乘", teacher:"陈老师", tone:"blue", className:"七（3）班", wrong:18, rate:46 },
+    { id:"q2", title:"移项后符号未改变", teacher:"李老师", tone:"amber", className:"七（2）班", wrong:14, rate:38 }
+  ];
   return `
-    <section class="teacher-contribution-section">
+    <section class="teacher-contribution-section${showFullLibrary ? " school-library-full" : ""}">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>本校资源</h2></div>
+        ${showFullLibrary ? `<div class="school-library-view-tabs" role="tablist" aria-label="本校题库内容类型">
+          <button class="active" data-school-library-tab="list" role="tab" aria-selected="true">
+            <b>题单资源</b><span>整份练习与测评</span>
+          </button>
+          <button data-school-library-tab="question" role="tab" aria-selected="false">
+            <b>题库</b><span>单题与班级错题</span>
+          </button>
+        </div>` : '<div class="shelf-title"><h2>本校题单</h2></div>'}
+        ${showFullLibrary ? `<div class="school-library-filter">
+          <button class="school-library-filter-trigger" type="button" aria-expanded="false">
+            <i class="ri-filter-3-line"></i><span>全部班级</span>
+          </button>
+          <div class="school-library-filter-popover" hidden>
+            <div class="school-library-filter-group">
+              <span>班级</span>
+              <button class="active" data-school-filter="class" data-school-value="all">全部班级</button>
+              <button data-school-filter="class" data-school-value="七（1）班">七（1）班</button>
+              <button data-school-filter="class" data-school-value="七（2）班">七（2）班</button>
+              <button data-school-filter="class" data-school-value="七（3）班">七（3）班</button>
+            </div>
+          </div>
+        </div>` : ""}
       </header>
       <div class="teacher-contribution-grid">
-        ${teacherTopics.map(topic => `
-          <button class="teacher-contribution-card" data-topic="${topic.id}">
+        ${teacherTopics.map(([topic, className]) => `
+          <button class="teacher-contribution-card" data-topic="${topic.id}" data-school-kind="list" data-school-class="${className}">
             <span class="teacher-contribution-main">
-              <b>${topic.title}</b>
+              <span class="school-library-title"><b>${topic.title}</b></span>
               <span class="teacher-contribution-meta">
                 <span class="teacher-avatar ${topic.author.tone || ""}">${topic.author.name.slice(0,1)}</span>
                 <small>${topic.author.name}</small>
-                <em>${topic.questions} 题 · ${topic.minutes} 分钟 · ${topic.usage.toLocaleString()} 人使用</em>
+                <em>${className} · ${topic.questions} 题 · ${topic.usage.toLocaleString()} 人使用</em>
               </span>
             </span>
             <i class="ri-arrow-right-s-line"></i>
           </button>`).join("")}
+        ${showFullLibrary ? schoolQuestions.map(question => `
+          <button class="teacher-contribution-card" data-school-question="${question.id}" data-school-kind="question" data-school-class="${question.className}" hidden>
+            <span class="teacher-contribution-main">
+              <span class="school-library-title"><em>单题</em><b>${question.title}</b></span>
+              <span class="teacher-contribution-meta">
+                <span class="teacher-avatar ${question.tone}">${question.teacher.slice(0,1)}</span>
+                <small>${question.teacher}</small>
+                <em>${question.className} · ${question.wrong} 人答错 · 错误率 ${question.rate}%</em>
+              </span>
+            </span>
+            <i class="ri-arrow-right-s-line"></i>
+          </button>`).join("") : ""}
       </div>
+      ${showFullLibrary ? '<div class="school-library-empty" hidden>当前筛选下暂无内容</div>' : ""}
     </section>`;
 }
 
@@ -484,10 +523,6 @@ function specialCategoryView() {
   const specialTopics = [byId.t1, byId.t3, byId.t5, byId.t23, byId.t28, byId.t31, byId.t32];
   return `
     <section class="category-detail special-detail">
-      <header class="detail-heading">
-        <div><p>复习与集中突破</p><h1>专项练习</h1><span>按知识点、易错类型和能力方向找到适合的题单</span></div>
-        <strong>418 <small>份题单</small></strong>
-      </header>
       <div class="special-browser">
         <nav class="knowledge-nav" aria-label="知识模块">
           <button class="active"><b>数与式</b><small>126 份</small></button>
@@ -510,34 +545,31 @@ function paperCategoryView() {
   const paperTopics = [byId.t2, byId.t4, byId.t6, byId.t14, byId.t16, byId.t25, byId.t27, byId.t33];
   return `
     <section class="category-detail paper-detail">
-      <header class="detail-heading">
-        <div><p>考试场景</p><h1>找试卷题单</h1><span>已匹配七年级数学，优先展示龙岗与深圳近三年真题</span></div>
-        <strong>126 <small>套深圳真题</small></strong>
-      </header>
-      <div class="paper-toolbar">
-        <div class="exam-stage-tabs" role="tablist" aria-label="考试场景">
-          <button class="active">期末</button><button>期中</button><button>月考</button><button>单元测试</button><button>中考真题</button>
-        </div>
-        <div class="paper-selectors">
-          <button>深圳市 <i class="ri-arrow-down-s-line"></i></button>
-          <button>2024—2026 <i class="ri-arrow-down-s-line"></i></button>
-          <button>七年级数学 <i class="ri-arrow-down-s-line"></i></button>
+      <div class="paper-browser">
+        <nav class="paper-filters" aria-label="考试类型">
+          <button class="active"><b>期末考试</b><small>38 套</small></button>
+          <button><b>期中考试</b><small>32 套</small></button>
+          <button><b>月考</b><small>24 套</small></button>
+          <button><b>单元测试</b><small>20 套</small></button>
+          <button><b>中考真题</b><small>12 套</small></button>
+        </nav>
+        <div class="paper-content">
+          <div class="paper-selectors">
+            <button>深圳市 <i class="ri-arrow-down-s-line"></i></button>
+            <button>2024—2026 <i class="ri-arrow-down-s-line"></i></button>
+            <button>七年级数学 <i class="ri-arrow-down-s-line"></i></button>
+          </div>
+          <header class="paper-result-heading"><div><b>本地优质试卷</b><span>按本地优先、年份由近到远排序</span></div><em>共 38 套期末试卷</em></header>
+          <div class="paper-result-grid">${paperTopics.map(topicCard).join("")}</div>
         </div>
       </div>
-      <header class="paper-result-heading"><div><b>本地优质试卷</b><span>按本地优先、年份由近到远排序</span></div><em>共 38 套期末试卷</em></header>
-      <div class="paper-result-grid">${paperTopics.map(topicCard).join("")}</div>
     </section>`;
 }
 
 function localCategoryView() {
   return `
     <section class="category-detail local-detail">
-      <header class="detail-heading">
-        <div><p>本地优先</p><h1>本区与本校题单</h1><span>来自龙岗区教研、片区共建和本校备课组</span></div>
-        <strong>92 <small>份本地题单</small></strong>
-      </header>
-      <div class="local-source-tabs"><button class="active">龙岗区教研</button><button>片区共建</button><button>本校共享</button></div>
-      ${schoolSection()}
+      ${teacherContributionSection(true)}
     </section>`;
 }
 
@@ -546,8 +578,7 @@ function schoolSection() {
   return `
     <section class="school-section">
       <header class="shelf-header">
-        <div class="shelf-title"><h2>本区与本校资源</h2></div>
-        <button class="view-all">进入本区题库 <i class="ri-arrow-right-s-line"></i></button>
+        <div class="shelf-title"><h2>本校题库</h2></div>
       </header>
       <div class="school-table">
         <div class="school-table-head"><span>题单名称</span><span>来源</span><span>内容</span><span>本校使用</span><span></span></div>
@@ -555,7 +586,7 @@ function schoolSection() {
           <button class="school-row" data-topic="${topic.id}">
             <span><b>${topic.title}</b><small>${topic.focus}</small></span>
             <span>${topic.source}</span>
-            <span>${topic.questions} 题 · ${topic.minutes} 分钟</span>
+            <span>${topic.questions} 题 · ${topic.difficulty}</span>
             <strong>${topic.usage.toLocaleString()} 人</strong>
             <i class="ri-arrow-right-s-line"></i>
           </button>`).join("")}
@@ -821,6 +852,45 @@ function bindContentEvents(root = document) {
     event.stopPropagation();
     showToast(`正在查看${button.dataset.author}发布的题单`);
   }));
+  root.querySelectorAll("[data-school-question]").forEach(button => button.addEventListener("click", () => {
+    showToast("正在打开单题详情");
+  }));
+  const updateSchoolLibraryView = section => {
+    const kind = section.querySelector("[data-school-library-tab].active")?.dataset.schoolLibraryTab || "list";
+    const className = section.querySelector('[data-school-filter="class"].active')?.dataset.schoolValue || "all";
+    let visible = 0;
+    section.querySelectorAll("[data-school-kind]").forEach(card => {
+      const matchesKind = card.dataset.schoolKind === kind;
+      const matchesClass = className === "all" || card.dataset.schoolClass === className;
+      card.hidden = !(matchesKind && matchesClass);
+      if (!card.hidden) visible += 1;
+    });
+    const empty = section.querySelector(".school-library-empty");
+    if (empty) empty.hidden = visible > 0;
+  };
+  root.querySelectorAll("[data-school-library-tab]").forEach(button => button.addEventListener("click", () => {
+    const section = button.closest(".teacher-contribution-section");
+    section.querySelectorAll("[data-school-library-tab]").forEach(item => {
+      const active = item === button;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", String(active));
+    });
+    updateSchoolLibraryView(section);
+  }));
+  root.querySelectorAll(".school-library-filter-trigger").forEach(button => button.addEventListener("click", () => {
+    const popover = button.nextElementSibling;
+    const expanded = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!expanded));
+    popover.hidden = expanded;
+  }));
+  root.querySelectorAll("[data-school-filter]").forEach(button => button.addEventListener("click", () => {
+    const section = button.closest(".teacher-contribution-section");
+    const group = button.closest(".school-library-filter-group");
+    group.querySelectorAll("[data-school-filter]").forEach(item => item.classList.toggle("active", item === button));
+    const className = section.querySelector('[data-school-filter="class"].active').dataset.schoolValue;
+    updateSchoolLibraryView(section);
+    section.querySelector(".school-library-filter-trigger span").textContent = className === "all" ? "全部班级" : className;
+  }));
   root.querySelectorAll(".chapter-rail button").forEach(button => button.addEventListener("click", () => {
     document.querySelectorAll(".chapter-rail button").forEach(item => item.classList.toggle("active", item === button));
     showToast(`已切换到${button.querySelector("b").textContent}`);
@@ -832,7 +902,7 @@ function bindContentEvents(root = document) {
     filterSeriesTopics(input.value);
     button.closest(".series-quick-links").querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
   }));
-  root.querySelectorAll(".knowledge-nav button, .knowledge-filters button, .exam-stage-tabs button, .local-source-tabs button").forEach(button => button.addEventListener("click", () => {
+  root.querySelectorAll(".knowledge-nav button, .knowledge-filters button, .paper-filters button, .local-source-tabs button").forEach(button => button.addEventListener("click", () => {
     const group = button.parentElement;
     group.querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
   }));

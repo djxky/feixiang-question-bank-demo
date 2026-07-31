@@ -52,10 +52,10 @@ const directories = {
 };
 
 const related = [
-  { id:"t9", tag:"同步巩固", title:"有理数运算基础过关题单", meta:"20 题 · 25 分钟", usage:"1,143 位老师使用" },
-  { id:"t31", tag:"方法专项", title:"代数式实际意义专项题单", meta:"13 题 · 18 分钟", usage:"692 位老师使用" },
-  { id:"t15", tag:"本地共建", title:"坂田片区课堂小测精选题单", meta:"12 题 · 15 分钟", usage:"512 位老师使用" },
-  { id:"t25", tag:"真题整理", title:"深圳中考数学基础题单", meta:"20 题 · 30 分钟", usage:"1,458 位老师使用" }
+  { id:"t9", tag:"同步巩固", title:"有理数运算基础过关题单", meta:"20 题", usage:"1,143 位老师使用" },
+  { id:"t31", tag:"方法专项", title:"代数式实际意义专项题单", meta:"13 题", usage:"692 位老师使用" },
+  { id:"t15", tag:"本地共建", title:"坂田片区课堂小测精选题单", meta:"12 题", usage:"512 位老师使用" },
+  { id:"t25", tag:"真题整理", title:"深圳中考数学基础题单", meta:"20 题", usage:"1,458 位老师使用" }
 ];
 
 const params = new URLSearchParams(location.search);
@@ -86,7 +86,6 @@ function renderTopic() {
   document.querySelector("#paperTitle").textContent = topic.title;
   document.querySelector("#topicFocus").textContent = topic.focus;
   document.querySelector("#questionCount").textContent = topic.questions;
-  document.querySelector("#topicMinutes").textContent = topic.minutes;
   document.querySelector("#topicDifficulty").textContent = topic.difficulty;
   document.querySelector("#topicUsage").textContent = topic.usage.toLocaleString();
   document.querySelector("#topicSource").textContent = topic.source;
