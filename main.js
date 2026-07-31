@@ -257,33 +257,26 @@ function personalizedRecommendationSection() {
 function syncPracticeSection() {
   const chapterTopics = [byId.t8, byId.t9, byId.t10, byId.t11, byId.t12];
   return `
-    <section class="sync-practice-section">
-      <header class="shelf-header">
-        <div class="shelf-title"><h2>同步练习</h2><p>先确认教材版本，再按当前教学章节找到日常作业题单</p></div>
-        <button class="view-all">查看全部同步题单 <i class="ri-arrow-right-s-line"></i></button>
-      </header>
-      <div class="sync-mode-bar">
-        <div class="sync-mode-title"><b>按教材章节</b><span>已自动匹配你的教学身份</span></div>
-        <div class="sync-current-source"><span>当前：人教版七年级上册</span><button>切换教材版本</button></div>
-      </div>
-      <div class="chapter-layout">
-        <nav class="chapter-rail" aria-label="教材章节">
-          <button><span>01</span><b>正数与负数</b><small>36 份题单</small></button>
-          <button class="active"><span>02</span><b>有理数及其运算</b><small>82 份题单</small></button>
-          <button><span>03</span><b>整式的加减</b><small>64 份题单</small></button>
-          <button><span>04</span><b>一元一次方程</b><small>71 份题单</small></button>
-          <button><span>05</span><b>图形初步认识</b><small>48 份题单</small></button>
+    <section class="category-detail sync-practice-section">
+      <div class="resource-browser">
+        <nav class="resource-tree chapter-rail" aria-label="教材章节">
+          <button data-result-title="第一章 · 正数与负数"><b>正数与负数</b><small>36 份</small></button>
+          <button class="active" data-result-title="第二章 · 有理数及其运算"><b>有理数及其运算</b><small>82 份</small></button>
+          <button data-result-title="第三章 · 整式的加减"><b>整式的加减</b><small>64 份</small></button>
+          <button data-result-title="第四章 · 一元一次方程"><b>一元一次方程</b><small>71 份</small></button>
+          <button data-result-title="第五章 · 图形初步认识"><b>图形初步认识</b><small>48 份</small></button>
         </nav>
-        <div class="chapter-topic-list">
-          <div class="chapter-list-heading"><span>第二章 · 有理数及其运算</span><strong>本章共 82 份题单</strong></div>
-          ${chapterTopics.map((topic, index) => `
-            <button class="chapter-topic-row" data-topic="${topic.id}">
-              <span class="chapter-order">${String(index + 1).padStart(2,"0")}</span>
-              <span><b>${topic.title}</b><small>${topic.focus}</small></span>
-              <em>${topic.questions} 题 · ${topic.difficulty}</em>
-              <strong>${topic.usage.toLocaleString()} 人使用</strong>
-              <i class="ri-arrow-right-s-line"></i>
-            </button>`).join("")}
+        <div class="resource-browser-content">
+          <div class="resource-browser-toolbar">
+            <div class="resource-chip-group">
+              <button class="active">全部练习</button><button>课时练习</button><button>单元检测</button><button>易错巩固</button>
+            </div>
+            <div class="resource-selector-group">
+              <button>人教版七上 <i class="ri-arrow-down-s-line"></i></button>
+            </div>
+          </div>
+          <header class="resource-result-heading"><b>第二章 · 有理数及其运算</b><em>82 份题单</em></header>
+          <div class="resource-card-grid">${chapterTopics.map(topicCard).join("")}</div>
         </div>
       </div>
     </section>`;
@@ -523,19 +516,23 @@ function specialCategoryView() {
   const specialTopics = [byId.t1, byId.t3, byId.t5, byId.t23, byId.t28, byId.t31, byId.t32];
   return `
     <section class="category-detail special-detail">
-      <div class="special-browser">
-        <nav class="knowledge-nav" aria-label="知识模块">
-          <button class="active"><b>数与式</b><small>126 份</small></button>
-          <button><b>方程与不等式</b><small>84 份</small></button>
-          <button><b>函数</b><small>72 份</small></button>
-          <button><b>图形与几何</b><small>96 份</small></button>
-          <button><b>统计与概率</b><small>40 份</small></button>
+      <div class="resource-browser special-browser">
+        <nav class="resource-tree knowledge-nav" aria-label="知识模块">
+          <button class="active" data-result-title="数与式"><b>数与式</b><small>126 份</small></button>
+          <button data-result-title="方程与不等式"><b>方程与不等式</b><small>84 份</small></button>
+          <button data-result-title="函数"><b>函数</b><small>72 份</small></button>
+          <button data-result-title="图形与几何"><b>图形与几何</b><small>96 份</small></button>
+          <button data-result-title="统计与概率"><b>统计与概率</b><small>40 份</small></button>
         </nav>
-        <div class="knowledge-content">
-          <div class="knowledge-filters">
-            <button class="active">全部专项</button><button>易错巩固</button><button>方法突破</button><button>情境应用</button><button>培优提高</button>
+        <div class="resource-browser-content knowledge-content">
+          <div class="resource-browser-toolbar">
+            <div class="resource-chip-group knowledge-filters">
+              <button class="active">全部专项</button><button>易错巩固</button><button>方法突破</button><button>情境应用</button><button>培优提高</button>
+            </div>
+            <div class="resource-selector-group"><button>全部难度 <i class="ri-arrow-down-s-line"></i></button></div>
           </div>
-          <div class="result-grid">${specialTopics.map(topicCard).join("")}</div>
+          <header class="resource-result-heading"><b>数与式</b><em>126 份题单</em></header>
+          <div class="resource-card-grid result-grid">${specialTopics.map(topicCard).join("")}</div>
         </div>
       </div>
     </section>`;
@@ -545,22 +542,25 @@ function paperCategoryView() {
   const paperTopics = [byId.t2, byId.t4, byId.t6, byId.t14, byId.t16, byId.t25, byId.t27, byId.t33];
   return `
     <section class="category-detail paper-detail">
-      <div class="paper-browser">
-        <nav class="paper-filters" aria-label="考试类型">
-          <button class="active"><b>期末考试</b><small>38 套</small></button>
-          <button><b>期中考试</b><small>32 套</small></button>
-          <button><b>月考</b><small>24 套</small></button>
-          <button><b>单元测试</b><small>20 套</small></button>
-          <button><b>中考真题</b><small>12 套</small></button>
+      <div class="resource-browser paper-browser">
+        <nav class="resource-tree paper-filters" aria-label="考试类型">
+          <button class="active" data-result-title="期末考试"><b>期末考试</b><small>38 套</small></button>
+          <button data-result-title="期中考试"><b>期中考试</b><small>32 套</small></button>
+          <button data-result-title="月考"><b>月考</b><small>24 套</small></button>
+          <button data-result-title="单元测试"><b>单元测试</b><small>20 套</small></button>
+          <button data-result-title="中考真题"><b>中考真题</b><small>12 套</small></button>
         </nav>
-        <div class="paper-content">
-          <div class="paper-selectors">
-            <button>深圳市 <i class="ri-arrow-down-s-line"></i></button>
-            <button>2024—2026 <i class="ri-arrow-down-s-line"></i></button>
-            <button>七年级数学 <i class="ri-arrow-down-s-line"></i></button>
+        <div class="resource-browser-content paper-content">
+          <div class="resource-browser-toolbar">
+            <div class="resource-chip-group"><button class="active">本地优先</button><button>使用最多</button></div>
+            <div class="resource-selector-group paper-selectors">
+              <button>深圳市 <i class="ri-arrow-down-s-line"></i></button>
+              <button>2024—2026 <i class="ri-arrow-down-s-line"></i></button>
+              <button>七年级数学 <i class="ri-arrow-down-s-line"></i></button>
+            </div>
           </div>
-          <header class="paper-result-heading"><div><b>本地优质试卷</b><span>按本地优先、年份由近到远排序</span></div><em>共 38 套期末试卷</em></header>
-          <div class="paper-result-grid">${paperTopics.map(topicCard).join("")}</div>
+          <header class="resource-result-heading"><b>期末考试</b><em>38 套试卷</em></header>
+          <div class="resource-card-grid paper-result-grid">${paperTopics.map(topicCard).join("")}</div>
         </div>
       </div>
     </section>`;
@@ -1044,9 +1044,19 @@ function bindContentEvents(root = document) {
     updateSchoolLibraryView(section);
     section.querySelector(".school-library-filter-trigger span").textContent = className === "all" ? "全部班级" : className;
   }));
-  root.querySelectorAll(".chapter-rail button").forEach(button => button.addEventListener("click", () => {
-    document.querySelectorAll(".chapter-rail button").forEach(item => item.classList.toggle("active", item === button));
-    showToast(`已切换到${button.querySelector("b").textContent}`);
+  root.querySelectorAll(".resource-tree button").forEach(button => button.addEventListener("click", () => {
+    const browser = button.closest(".resource-browser");
+    button.parentElement.querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
+    const title = button.dataset.resultTitle || button.querySelector("b").textContent;
+    const count = button.querySelector("small").textContent.trim();
+    browser.querySelector(".resource-result-heading b").textContent = title;
+    browser.querySelector(".resource-result-heading em").textContent = count.includes("套") ? `${count}试卷` : `${count}题单`;
+  }));
+  root.querySelectorAll(".resource-chip-group button").forEach(button => button.addEventListener("click", () => {
+    button.parentElement.querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
+  }));
+  root.querySelectorAll(".resource-selector-group button").forEach(button => button.addEventListener("click", () => {
+    showToast(`正在调整${button.textContent.trim()}`);
   }));
   root.querySelectorAll("[data-series-search]").forEach(input => input.addEventListener("input", () => filterSeriesTopics(input.value)));
   root.querySelectorAll("[data-series-query]").forEach(button => button.addEventListener("click", () => {
@@ -1055,7 +1065,7 @@ function bindContentEvents(root = document) {
     filterSeriesTopics(input.value);
     button.closest(".series-quick-links").querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
   }));
-  root.querySelectorAll(".knowledge-nav button, .knowledge-filters button, .paper-filters button, .local-source-tabs button").forEach(button => button.addEventListener("click", () => {
+  root.querySelectorAll(".local-source-tabs button").forEach(button => button.addEventListener("click", () => {
     const group = button.parentElement;
     group.querySelectorAll("button").forEach(item => item.classList.toggle("active", item === button));
   }));
